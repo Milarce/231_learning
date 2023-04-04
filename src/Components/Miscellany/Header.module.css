@@ -1,0 +1,35 @@
+.bdoHeader {
+  display: flex;
+  flex-direction: row;
+  padding: 0.3em 0.5em;
+  background-color: #ed1a3b;
+  height: 43px;
+  font-family: SegoeUI-SemiBold-final, Segoe UI Semibold, SegoeUI-Regular-final,
+    Segoe UI, "Segoe UI Web (West European)", Segoe, -apple-system,
+    BlinkMacSystemFont, Roboto, Helvetica Neue, Tahoma, Helvetica, Arial,
+    sans-serif;
+  line-height: 48px;
+  color: #fff;
+}
+
+.bdoHeader img {
+  width: 100px;
+  height: 70px;
+}
+
+.bdoHeader ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.bdoHeader ul li {
+  font-size: 1.5rem;
+  font-weight: 600;
+  list-style: none;
+  display: inline-block;
+}
+
+.bdoHeader ul li a {
+  text-decoration: none;
+}
