@@ -8,12 +8,17 @@ const Footer = (props) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <Social />
+        <div className={`${styles.social} ${styles["links-column"]}`}>
+          <Social />
+        </div>
 
         <div className={styles["links-column"]}>
           <ul>
             <li className={styles["call-button"]}>
-              <a className="button primary" href="tel:02 582010">
+              <a
+                className={`${styles.button} ${styles.primary}`}
+                href="tel:02 582010"
+              >
                 Chiama BDO
               </a>
             </li>

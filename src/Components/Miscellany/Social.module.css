@@ -1,0 +1,9 @@
+.social-grid {
+  display: grid;
+  grid-template-columns: 6rem 6rem 6rem;
+  grid-template-rows: 6rem 6rem;
+}
+
+.social-grid a {
+  font-size: 2rem !important;
+}
