@@ -9,7 +9,7 @@ const Footer = (props) => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={`${styles.social} ${styles["links-column"]}`}>
-          <Social />
+          <Social classType="social-grid" />
         </div>
 
         <div className={styles["links-column"]}>

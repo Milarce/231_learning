@@ -1,25 +1,29 @@
 @import url("https://fonts.cdnfonts.com/css/proxima-nova-2");
 
 .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #323232;
   color: #e4e4e4;
-  padding: 45px 0;
+  font-family: "Proxima Nova", arial;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  max-width: 80%;
+  padding: 45px 0;
 }
 
 .links-column {
   border-left: 1px solid #505050;
-  padding: 0 3rem 0 5rem;
+  padding-left: 5rem;
   max-width: 40rem;
 }
 .social {
   border-left: none;
+  padding: 0;
 }
 
 .links-column ul {
@@ -77,6 +81,19 @@
   display: inline-block;
 }
 
+@media (width>= 1140px) {
+  .container {
+    width: 1140px;
+  }
+}
+
+@media (769px <= width < 1140px) {
+  .container {
+    width: 970px;
+  }
+}
+
+/*
 @media (min-width: 0) and (max-width: 320px) {
   .footer .links-column .call-button {
     display: block;
@@ -94,3 +111,4 @@
     width: auto;
   }
 }
+*/

@@ -3,11 +3,13 @@ import Header from "./Components/Miscellany/Header";
 import Footer from "./Components/Miscellany/Footer";
 import "./App.css";
 import Content from "./Components/Content";
+import MenuBar from "./Components/Miscellany/MenuBar";
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <MenuBar />
       <Content />
       <Footer />
     </div>

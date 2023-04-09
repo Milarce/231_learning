@@ -9,9 +9,9 @@ import {
   faRss,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Social = () => {
+const Social = (props) => {
   return (
-    <div className={styles["social-grid"]}>
+    <div className={styles[`${props.classType}`]}>
       <a
         href="https://twitter.com/bdo_italia"
         aria-label="Twitter"

@@ -1,3 +1,15 @@
+.social-flex {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.social-flex a {
+  text-decoration: none;
+  color: #e4e4e4;
+  font-size: 1.2rem;
+}
+
 .social-grid {
   display: grid;
   grid-template-columns: 6rem 6rem 6rem;
