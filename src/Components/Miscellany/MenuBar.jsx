@@ -1,22 +1,22 @@
 import React from "react";
 import styles from "./MenuBar.module.css";
+import logo from "../../img/logo/rsz_bdo_logosvg.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+//<FontAwesomeIcon icon={faMagnifyingGlass} />
 
 const MenuBar = () => {
   return (
-    <menu className={styles["sub-header"]}>
+    <div className={styles["sub-header"]}>
       <div className={styles.container}>
         <div className={styles["logo-container"]}>
           <a id="logoLink" href="https://www.bdo.it/it-it/home-it">
-            <img
-              src="../../../img/logo/rsz_bdo_logosvg.png"
-              alt="BDO logo"
-              className="logo"
-            />
-            <span id="mfname">ITALIA</span>
+            <img src={logo} alt="BDO logo" className={styles.logo} />
+            <span className={styles.italia}>Italia</span>
           </a>
         </div>
 
-        <nav>
+        <nav className={styles["menu-nav"]}>
           <ul>
             <li>
               <span
@@ -67,24 +67,25 @@ const MenuBar = () => {
             </li>
           </ul>
         </nav>
-
-        <div className={styles["search-container"]}>
+        <form className={styles["search-container"]}>
           <input
             name="searchBox"
             type="text"
             maxlength="1000"
-            className="search-input form-control"
+            className={styles["search-input"]}
             autocomplete="off"
           ></input>
-          <input
+          <button
             type="submit"
             name="searchBtn"
             value="Search"
-            className="icon btn btn-default"
-          ></input>
-        </div>
+            className={styles["search-icon"]}
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+        </form>
       </div>
-    </menu>
+    </div>
   );
 };
 

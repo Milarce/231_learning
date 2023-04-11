@@ -17,7 +17,7 @@
   justify-content: space-between;
 }
 
-nav {
+.header-nav {
   display: flex;
   align-items: center;
   gap: 3rem;
@@ -44,6 +44,7 @@ nav {
 .main-header ul li a {
   text-decoration: none;
   color: #e4e4e4;
+  cursor: pointer;
 }
 
 @media (width>= 1140px) {

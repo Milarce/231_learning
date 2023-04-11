@@ -8,7 +8,7 @@ const Header = () => {
     <header className={styles["main-header"]}>
       <div className={styles.container}>
         <Social classType="social-flex" />
-        <nav>
+        <nav className={styles["header-nav"]}>
           <ul>
             <li>
               <a target="_blank" href="https://www.bdo.global/">
