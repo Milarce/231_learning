@@ -74,6 +74,7 @@ const MenuBar = () => {
             maxlength="1000"
             className={styles["search-input"]}
             autocomplete="off"
+            placeholder="Cerca"
           ></input>
           <button
             type="submit"
