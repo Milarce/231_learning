@@ -1,0 +1,42 @@
+[
+  {
+    "idAzienda": "31190",
+    "desAzienda": "Granarolo",
+    "DesQuestionario": "Modello di organizzazione, gestione e controllo ai sensi del D.Lgs. 231/01",
+    "MailMittente": "<learning@231workstation.com>",
+    "Documentation": "doc-Granarolo-link",
+    "Images": "img-Granarolo-link",
+    "fasi": [
+      {
+        "id": 0,
+        "Descrizione": "Mail invito scarico documentazione",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      }
+    ]
+  },
+  {
+    "idAzienda": "31191",
+    "desAzienda": "Ferrari",
+    "DesQuestionario": "Modello di organizzazione, gestione e controllo ai sensi del D.Lgs. 231/01",
+    "MailMittente": "<learning@231workstation.com>",
+    "Documentation": "doc-ferrari-link",
+    "Images": "img-ferrari-link",
+    "fasi": [
+      {
+        "id": 0,
+        "Descrizione": "Mail invito scarico documentazione",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      }
+    ]
+  }
+]

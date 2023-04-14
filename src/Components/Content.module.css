@@ -1,4 +1,22 @@
-.content {
+.section {
   height: 100vh;
-  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  height: 50vh;
+  margin-top: 115px;
+}
+
+@media (width>= 1140px) {
+  .content {
+    width: 1140px;
+  }
+}
+
+@media (769px <= width < 1140px) {
+  .content {
+    width: 970px;
+  }
 }

@@ -20,16 +20,16 @@ const MenuBar = () => {
           <ul>
             <li>
               <span
-                tabindex="0"
+                tabIndex="0"
                 className="main-item"
                 data-view-all="/it-it/services-it"
               >
-                <a href="https://www.bdo.it/it-it/services-it">Services</a>
+                <a href="https://www.bdo.it/it-it/services-it">Azienda</a>
               </span>
             </li>
             <li>
               <span
-                tabindex="0"
+                tabIndex="0"
                 className="main-item"
                 data-view-all="/it-it/industries-it"
               >
@@ -38,7 +38,7 @@ const MenuBar = () => {
             </li>
             <li>
               <span
-                tabindex="0"
+                tabIndex="0"
                 className="main-item"
                 data-view-all="/it-it/insights-it"
               >
@@ -47,7 +47,7 @@ const MenuBar = () => {
             </li>
             <li>
               <span
-                tabindex="0"
+                tabIndex="0"
                 className="main-item"
                 data-view-all="/it-it/chi-siamo"
               >
@@ -56,7 +56,7 @@ const MenuBar = () => {
             </li>
             <li>
               <span
-                tabindex="0"
+                tabIndex="0"
                 className="main-item"
                 data-view-all="/it-it/chi-siamo/bdo-alumni"
               >
@@ -71,9 +71,9 @@ const MenuBar = () => {
           <input
             name="searchBox"
             type="text"
-            maxlength="1000"
+            maxLength="1000"
             className={styles["search-input"]}
-            autocomplete="off"
+            autoComplete="off"
             placeholder="Cerca"
           ></input>
           <button
