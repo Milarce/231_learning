@@ -1,4 +1,4 @@
-.general {
+.login {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -6,6 +6,28 @@
   border: none;
 }
 
-.general:hover {
+.login:hover {
+  cursor: pointer;
+}
+
+.create {
+  background-color: #ed1a3b;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.create:hover {
+  cursor: pointer;
+}
+
+.back {
+  background-color: #323232;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.back:hover {
   cursor: pointer;
 }

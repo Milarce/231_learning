@@ -34,7 +34,7 @@ const Header = () => {
               <a href="/it-it/careers-it">Careers</a>
             </li>
           </ul>
-          <Button btnType={"button"} text={"A"} />
+          <Button btnType={"button"} text={"A"} btnStyle={"login"} />
         </nav>
       </div>
     </header>
