@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useRef } from "react";
 import styles from "./CreateCompany.module.css";
-import HeaderTable from "./Miscellany/HeaderTable";
+import HeaderTable from "./Table/HeaderTable";
 import companies from "../DATA/aziende.json";
 import Button from "./Miscellany/Button";
 
@@ -10,6 +10,8 @@ const newId = +companies.at(-1).idAzienda + 1;
 const CreateCompany = () => {
   const [docFile, setDocFile] = useState();
   const [imgFile, setImgFile] = useState();
+  const companyNameRef = useRef();
+  const questionsNameRef = useRef();
 
   const handleFileChange = (e) => {
     if (e.target.files) {
@@ -21,6 +23,11 @@ const CreateCompany = () => {
     if (e.target.files) {
       setImgFile(e.target.files[0]);
     }
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(companyNameRef.current.value);
   };
 
   const handleUploadClick = () => {
@@ -46,6 +53,7 @@ const CreateCompany = () => {
           type="text"
           maxLength={50}
           placeholder="Azienda - Formazione 231 (anno)"
+          ref={companyNameRef}
         />
 
         <input
@@ -53,6 +61,7 @@ const CreateCompany = () => {
           name="questionsName"
           type="text"
           maxLength={255}
+          ref={questionsNameRef}
         />
         <input
           className={styles.upload}

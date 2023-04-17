@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 4px;
+}
+
+.top {
+  color: white;
+  background: #ed1a3b;
+  font-weight: 600;
+  justify-content: center;
+}
+
+li {
+  list-style: none;
+}
+
+.one-size {
+  flex: 1;
+}
+
+.two-size {
+  flex: 2;
+}
+.four-size {
+  flex: 4;
+}
+
+.seven-size {
+  flex: 7;
+}

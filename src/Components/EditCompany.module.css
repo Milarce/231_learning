@@ -1,0 +1,29 @@
+.edit-container {
+  width: 60%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  width: 101px;
+  height: 38px;
+}
+
+.company-title {
+  text-transform: uppercase;
+  color: #22409a;
+  font-weight: 600;
+  font-size: 1.3rem;
+  align-self: flex-end;
+}
+
+.table-header {
+  display: flex;
+  gap: 4px;
+  margin: 8px 0 0 0;
+  padding: 0;
+}

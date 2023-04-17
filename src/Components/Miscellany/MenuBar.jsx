@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MenuBar.module.css";
-import logo from "../../img/logo/rsz_bdo_logosvg.png";
+import logoBDO from "../../img/logo/rsz_bdo_logosvg.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 //<FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -11,7 +11,7 @@ const MenuBar = () => {
       <div className={styles.container}>
         <div className={styles["logo-container"]}>
           <a id="logoLink" href="https://www.bdo.it/it-it/home-it">
-            <img src={logo} alt="BDO logo" className={styles.logo} />
+            <img src={logoBDO} alt="BDO logo" className={styles.logo} />
             <span className={styles.italia}>Italia</span>
           </a>
         </div>

@@ -24,21 +24,21 @@ li {
 }
 
 .first {
-  flex: 0 1 60px;
+  flex: 1;
 }
 
 .scnd {
-  flex: 0 1 300px;
+  flex: 4;
 }
 
 .third {
-  flex: 0 1 500px;
+  flex: 7;
 }
 
 .fourth {
-  flex: 0 1 150px;
+  flex: 2;
 }
 
 .fifth {
-  flex: 0 1 150px;
+  flex: 2;
 }

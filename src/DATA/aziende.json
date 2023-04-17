@@ -16,6 +16,56 @@
         "noSolleciti": 2,
         "giorniSollecito": "10",
         "tipoFase": "Invito"
+      },
+      {
+        "id": 1,
+        "Descrizione": "Invito ricevuto - In attesa presa visione documentazione",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 2,
+        "Descrizione": "Mail invito compilazione questionario",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 3,
+        "Descrizione": "Invito questionario ricevuto - In attesa adesione modello",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 4,
+        "Descrizione": "Adesione confermata - Questionario da compilare",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 5,
+        "Descrizione": "Questionario completato - Esito commentato",
+        "blobId": 264,
+        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
       }
     ]
   },
@@ -31,7 +81,57 @@
         "id": 0,
         "Descrizione": "Mail invito scarico documentazione",
         "blobId": 264,
-        "blobTags": "Granarolo-soloconsegna.docs",
+        "blobTags": "Ferrari-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 1,
+        "Descrizione": "Invito ricevuto - In attesa presa visione documentazione",
+        "blobId": 264,
+        "blobTags": "Ferrari-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 2,
+        "Descrizione": "Mail invito compilazione questionario",
+        "blobId": 264,
+        "blobTags": "Ferrari-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 3,
+        "Descrizione": "Invito questionario ricevuto - In attesa adesione modello",
+        "blobId": 264,
+        "blobTags": "Ferrari-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 4,
+        "Descrizione": "Adesione confermata - Questionario da compilare",
+        "blobId": 264,
+        "blobTags": "Ferrari-soloconsegna.docs",
+        "blobLink": "",
+        "noSolleciti": 2,
+        "giorniSollecito": "10",
+        "tipoFase": "Invito"
+      },
+      {
+        "id": 5,
+        "Descrizione": "Questionario completato - Esito commentato",
+        "blobId": 264,
+        "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
