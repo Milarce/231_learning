@@ -1,0 +1,29 @@
+.list {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 4px;
+}
+
+.item {
+  background: white;
+}
+
+li {
+  list-style: none;
+}
+
+.one-size {
+  flex: 1;
+}
+
+.two-size {
+  flex: 2;
+}
+.four-size {
+  flex: 4;
+}
+
+.seven-size {
+  flex: 7;
+}

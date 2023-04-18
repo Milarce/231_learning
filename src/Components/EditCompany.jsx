@@ -3,40 +3,98 @@ import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
 import companies from "../DATA/aziende.json";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
-import RowsTable from "./Table/RowsTable";
+import RowsTableCopy from "./Table/RowsTableCopy";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const EditCompany = (props) => {
-  const tableHeader = ["Id", "Descrizione", "Modifica"];
-  const setStyles = ["one-size", "seven-size", "one-size"];
+  const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
+  const tableHeaderCompany = [
+    "ID",
+    "Nome Azienda",
+    "Questionario",
+    "Documentazione",
+    "Logo",
+  ];
+  const setStylesCompany = [
+    "one-size",
+    "four-size",
+    "seven-size",
+    "two-size",
+    "two-size",
+  ];
+  const setStylesFasi = ["one-size", "seven-size", "one-size"];
   const hardcodedId = "31190";
 
-  const renderSteps = () => {
-    const selectedCompany = companies.find(
-      (company) => company.idAzienda === hardcodedId
+  const extractCompany = (companyId) => {
+    const companyObj = companies.find(
+      (company) => company.idAzienda === companyId
     );
-    selectedCompany.fasi.map((step, i) => {
-      return <RowsTable key={i} data={company} />;
+    return companyObj;
+  };
+
+  const extractValues = (id) => {
+    const companyObj = extractCompany(id);
+    const values = Object.values(companyObj);
+    return values.slice(0, 5);
+  };
+
+  const extractSteps = (id) => {
+    const company = extractCompany(id);
+    const { fasi } = company;
+
+    const textArr = fasi.map((fase) => {
+      const faseValues = Object.values(fase);
+      return [
+        ...faseValues.slice(0, 2),
+        <FontAwesomeIcon icon={faPenToSquare} />,
+      ];
     });
+    return textArr;
   };
 
   return (
-    <div className={styles["edit-container"]}>
+    <React.Fragment>
       <div className={styles["logo-container"]}>
         <img src={logoCmpny} alt="Logo-BDO" className={styles.logo} />
         <span className={styles["company-title"]}>
           Granarolo - Formazione 231
         </span>
       </div>
-      <div className="steps">
-        <p className={styles["step-title"]}>Fasi</p>
-        <ul className={styles["table-header"]}>
-          {tableHeader.map((item, i) => {
-            return <ItemHeaderTable key={i} text={item} size={setStyles[i]} />;
+      <ul className={styles["table-header"]}>
+        {tableHeaderCompany.map((item, i) => {
+          return (
+            <ItemHeaderTable key={i} text={item} size={setStylesCompany[i]} />
+          );
+        })}
+      </ul>
+      <RowsTableCopy
+        rows={extractValues(hardcodedId)}
+        sendStyles={setStylesCompany}
+      />
+
+      <div className={styles["steps-container"]}>
+        <div className="steps">
+          <p className={styles["step-title"]}>Fasi</p>
+          <ul className={styles["table-header"]}>
+            {tableHeaderFasi.map((item, i) => {
+              return (
+                <ItemHeaderTable key={i} text={item} size={setStylesFasi[i]} />
+              );
+            })}
+          </ul>
+          {extractSteps(hardcodedId).map((faseText, i) => {
+            return (
+              <RowsTableCopy
+                key={i}
+                rows={faseText}
+                sendStyles={setStylesFasi}
+              />
+            );
           })}
-        </ul>
-        {}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

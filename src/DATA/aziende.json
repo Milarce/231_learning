@@ -3,9 +3,9 @@
     "idAzienda": "31190",
     "desAzienda": "Granarolo",
     "DesQuestionario": "Modello di organizzazione, gestione e controllo ai sensi del D.Lgs. 231/01",
-    "MailMittente": "<learning@231workstation.com>",
     "Documentation": "doc-Granarolo-link",
     "Images": "img-Granarolo-link",
+    "MailMittente": "<learning@231workstation.com>",
     "fasi": [
       {
         "id": 0,
@@ -73,9 +73,9 @@
     "idAzienda": "31191",
     "desAzienda": "Ferrari",
     "DesQuestionario": "Modello di organizzazione, gestione e controllo ai sensi del D.Lgs. 231/01",
-    "MailMittente": "<learning@231workstation.com>",
     "Documentation": "doc-ferrari-link",
     "Images": "img-ferrari-link",
+    "MailMittente": "<learning@231workstation.com>",
     "fasi": [
       {
         "id": 0,
