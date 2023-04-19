@@ -73,3 +73,7 @@ li {
 .fifth {
   flex: 0 1 150px;
 }
+
+input:focus {
+  outline: none;
+}

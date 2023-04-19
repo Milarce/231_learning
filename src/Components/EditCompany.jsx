@@ -6,6 +6,7 @@ import ItemHeaderTable from "./Table/ItemHeaderTable";
 import RowsTableCopy from "./Table/RowsTableCopy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import EditStep from "./EditStep";
 
 const EditCompany = (props) => {
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
@@ -25,6 +26,7 @@ const EditCompany = (props) => {
   ];
   const setStylesFasi = ["one-size", "seven-size", "one-size"];
   const hardcodedId = "31190";
+  const hardCodedStep = ["Mail invito scarico documentazione"];
 
   const extractCompany = (companyId) => {
     const companyObj = companies.find(
@@ -92,6 +94,8 @@ const EditCompany = (props) => {
               />
             );
           })}
+
+          <EditStep stepName={hardCodedStep} />
         </div>
       </div>
     </React.Fragment>
