@@ -7,6 +7,25 @@ import RowsTableCopy from "./Table/RowsTableCopy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import EditStep from "./EditStep";
+import ListSteps from "./ListSteps";
+
+/*<ul className={styles["table-header"]}>
+            {tableHeaderFasi.map((item, i) => {
+              return (
+                <ItemHeaderTable key={i} text={item} size={setStylesFasi[i]} />
+              );
+            })}
+  </ul> */
+
+/*{extractSteps(hardcodedId).map((faseText, i) => {
+            return (
+              <RowsTableCopy
+                key={i}
+                rows={faseText}
+                sendStyles={setStylesFasi}
+              />
+            );
+          })}*/
 
 const EditCompany = (props) => {
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
@@ -41,10 +60,11 @@ const EditCompany = (props) => {
     return values.slice(0, 5);
   };
 
-  const extractSteps = (id) => {
+  const extractStepsArr = (id) => {
     const company = extractCompany(id);
     const { fasi } = company;
-
+    return fasi;
+    /*
     const textArr = fasi.map((fase) => {
       const faseValues = Object.values(fase);
       return [
@@ -52,7 +72,7 @@ const EditCompany = (props) => {
         <FontAwesomeIcon icon={faPenToSquare} />,
       ];
     });
-    return textArr;
+    return textArr;*/
   };
 
   return (
@@ -78,25 +98,16 @@ const EditCompany = (props) => {
       <div className={styles["steps-container"]}>
         <div className="steps">
           <p className={styles["step-title"]}>Fasi</p>
-          <ul className={styles["table-header"]}>
-            {tableHeaderFasi.map((item, i) => {
-              return (
-                <ItemHeaderTable key={i} text={item} size={setStylesFasi[i]} />
-              );
-            })}
-          </ul>
-          {extractSteps(hardcodedId).map((faseText, i) => {
-            return (
-              <RowsTableCopy
-                key={i}
-                rows={faseText}
-                sendStyles={setStylesFasi}
-              />
-            );
-          })}
-
-          <EditStep stepName={hardCodedStep} />
         </div>
+
+        <ListSteps
+          headerText={tableHeaderFasi}
+          headerStyles={setStylesFasi}
+          stepsArr={extractStepsArr(hardcodedId)}
+          rowsStyles={setStylesFasi}
+        />
+
+        <EditStep stepName={hardCodedStep} />
       </div>
     </React.Fragment>
   );
