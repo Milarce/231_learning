@@ -1,23 +1,16 @@
 import React from "react";
 import styles from "./HeaderTable.module.css";
+import ItemHeaderTable from "./ItemHeaderTable";
 
-const HeaderTable = () => {
+const HeaderTable = (props) => {
   return (
-    <header>
-      <ul className={styles["table-header"]}>
-        <li className={`${styles.list} ${styles.top} ${styles.first}`}>ID</li>
-        <li className={`${styles.list} ${styles.top} ${styles.scnd}`}>
-          Nome Azienda
-        </li>
-        <li className={`${styles.list} ${styles.top} ${styles.third}`}>
-          Questionario
-        </li>
-        <li className={`${styles.list} ${styles.top} ${styles.fourth}`}>
-          Documentazione
-        </li>
-        <li className={`${styles.list} ${styles.top} ${styles.fifth}`}>Logo</li>
-      </ul>
-    </header>
+    <ul className={styles["table-header"]}>
+      {props.rows.map((item, i) => {
+        return (
+          <ItemHeaderTable key={i} text={item} size={props.sendStyles[i]} />
+        );
+      })}
+    </ul>
   );
 };
 

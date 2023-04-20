@@ -1,0 +1,42 @@
+.table {
+  display: flex;
+  height: 45px;
+  gap: 4px;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 4px;
+}
+
+.item {
+  background: white;
+}
+
+li {
+  list-style: none;
+}
+
+.first {
+  flex: 1;
+}
+
+.scnd {
+  flex: 4;
+}
+
+.third {
+  flex: 7;
+}
+
+.fourth {
+  flex: 2;
+}
+
+.fifth {
+  flex: 2;
+}

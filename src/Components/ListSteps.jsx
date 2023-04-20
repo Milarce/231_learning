@@ -1,16 +1,13 @@
 import React from "react";
-import HeaderTableCopy from "./Table/HeaderTableCopy";
-import RowsTableCopy from "./Table/RowsTableCopy";
+import HeaderTable from "./Table/HeaderTable";
+import RowsTable from "./Table/RowsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const ListSteps = (props) => {
   return (
     <React.Fragment>
-      <HeaderTableCopy
-        rows={props.headerText}
-        sendStyles={props.headerStyles}
-      />
+      <HeaderTable rows={props.headerText} sendStyles={props.headerStyles} />
       {props.stepsArr.map((stepObj, i) => {
         const faseValues = Object.values(stepObj); //Extrae los valores de cada objeto fase
         const rowsText = [
@@ -19,11 +16,7 @@ const ListSteps = (props) => {
           <FontAwesomeIcon icon={faPenToSquare} />,
         ];
         return (
-          <RowsTableCopy
-            key={i}
-            rows={rowsText}
-            sendStyles={props.rowsStyles}
-          />
+          <RowsTable key={i} rows={rowsText} sendStyles={props.rowsStyles} />
         );
       })}
     </React.Fragment>

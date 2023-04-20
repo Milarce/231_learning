@@ -1,13 +1,15 @@
 import React, { ChangeEvent, useState, useRef } from "react";
 import styles from "./CreateCompany.module.css";
 import HeaderTable from "./Table/HeaderTable";
+import CompanyLogo from "./Miscellany/CompanyLogo";
 import companies from "../DATA/aziende.json";
 import Button from "./Miscellany/Button";
+import logoLearning from "../img/logo/logo_231/231-logo-color.png";
 
 const newId = +companies.at(-1).idAzienda + 1;
 //<button onClick={handleUploadClick}>Upload</button>
 
-const CreateCompany = () => {
+const CreateCompany = (props) => {
   const [docFile, setDocFile] = useState();
   const [imgFile, setImgFile] = useState();
   const companyNameRef = useRef();
@@ -38,10 +40,8 @@ const CreateCompany = () => {
 
   return (
     <React.Fragment>
-      <div className={styles["create-header"]}>
-        <p>Creazione nuova azienda</p>
-      </div>
-      <HeaderTable />
+      <CompanyLogo logoPath={logoLearning} companyName={"Crea nuova azienda"} />
+      <HeaderTable rows={props.headerText} sendStyles={props.sizeArr} />
 
       <form className={styles.table}>
         <li className={`${styles.list} ${styles.item} ${styles.first}`}>

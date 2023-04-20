@@ -33,8 +33,14 @@ const Content = () => {
   return (
     <section className={styles.section}>
       <div className={styles.content}>
-        <CreateCompany />
-        <EditCompany />
+        <CreateCompany
+          headerText={companyHeaderTexts}
+          sizeArr={companyStylesArr}
+        />
+        <EditCompany
+          headerText={companyHeaderTexts}
+          sizeArr={companyStylesArr}
+        />
         <ListCompany
           headerText={companyHeaderTexts}
           sizeArr={companyStylesArr}

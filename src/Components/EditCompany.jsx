@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
 import companies from "../DATA/aziende.json";
-import ItemHeaderTable from "./Table/ItemHeaderTable";
-import RowsTableCopy from "./Table/RowsTableCopy";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import RowsTable from "./Table/RowsTable";
 import EditStep from "./EditStep";
 import ListSteps from "./ListSteps";
+import HeaderTable from "./Table/HeaderTable";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import CompanyLogo from "./Miscellany/CompanyLogo";
 
 /*<ul className={styles["table-header"]}>
             {tableHeaderFasi.map((item, i) => {
@@ -29,13 +30,6 @@ import ListSteps from "./ListSteps";
 
 const EditCompany = (props) => {
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
-  const tableHeaderCompany = [
-    "ID",
-    "Nome Azienda",
-    "Questionario",
-    "Documentazione",
-    "Logo",
-  ];
   const setStylesCompany = [
     "one-size",
     "four-size",
@@ -77,20 +71,13 @@ const EditCompany = (props) => {
 
   return (
     <React.Fragment>
-      <div className={styles["logo-container"]}>
-        <img src={logoCmpny} alt="Logo-BDO" className={styles.logo} />
-        <span className={styles["company-title"]}>
-          Granarolo - Formazione 231
-        </span>
-      </div>
-      <ul className={styles["table-header"]}>
-        {tableHeaderCompany.map((item, i) => {
-          return (
-            <ItemHeaderTable key={i} text={item} size={setStylesCompany[i]} />
-          );
-        })}
-      </ul>
-      <RowsTableCopy
+      <CompanyLogo
+        logoPath={logoCmpny}
+        companyName={extractCompany(hardcodedId).desAzienda}
+      />
+      <HeaderTable rows={props.headerText} sendStyles={props.sizeArr} />
+
+      <RowsTable
         rows={extractValues(hardcodedId)}
         sendStyles={setStylesCompany}
       />
