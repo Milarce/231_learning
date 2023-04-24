@@ -39,7 +39,6 @@ const EditCompany = (props) => {
   ];
   const setStylesFasi = ["one-size", "seven-size", "one-size"];
   const hardcodedId = "31190";
-  const hardCodedStep = ["Mail invito scarico documentazione"];
 
   const extractCompany = (companyId) => {
     const companyObj = companies.find(
@@ -93,8 +92,6 @@ const EditCompany = (props) => {
           stepsArr={extractStepsArr(hardcodedId)}
           rowsStyles={setStylesFasi}
         />
-
-        <EditStep stepName={hardCodedStep} />
       </div>
     </React.Fragment>
   );

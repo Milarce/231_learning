@@ -4,6 +4,8 @@ import ListCompany from "./ListCompany";
 import CreateCompany from "./CreateCompany";
 import EditCompany from "./EditCompany";
 import companies from "../DATA/aziende.json";
+import EditStep from "./EditStep";
+import MessageModal from "./Modals/MessageModal";
 
 const companyHeaderTexts = [
   "ID",
@@ -21,6 +23,10 @@ const companyStylesArr = [
   "two-size",
 ];
 
+const hardCodedStep = ["Mail invito scarico documentazione"];
+
+const IsVisibile = false;
+
 const Content = () => {
   const extractCompanyDetails = (companiesArr) => {
     const detailsArr = companiesArr.map((cmpy) => {
@@ -33,19 +39,24 @@ const Content = () => {
   return (
     <section className={styles.section}>
       <div className={styles.content}>
-        <CreateCompany
-          headerText={companyHeaderTexts}
-          sizeArr={companyStylesArr}
-        />
-        <EditCompany
-          headerText={companyHeaderTexts}
-          sizeArr={companyStylesArr}
+        <MessageModal
+          title={"Error!"}
+          msgText={"Upsss! Something went wrong"}
         />
         <ListCompany
           headerText={companyHeaderTexts}
           sizeArr={companyStylesArr}
           companiesDetails={extractCompanyDetails(companies)}
         />
+        <CreateCompany
+          headers={companyHeaderTexts}
+          sizeArr={companyStylesArr}
+        />
+        <EditCompany
+          headerText={companyHeaderTexts}
+          sizeArr={companyStylesArr}
+        />
+        <EditStep stepName={hardCodedStep} />
       </div>
     </section>
   );

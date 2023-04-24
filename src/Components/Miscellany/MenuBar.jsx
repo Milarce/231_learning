@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 //<FontAwesomeIcon icon={faMagnifyingGlass} />
 
-const MenuBar = () => {
+const MenuBar = (props) => {
   return (
     <div className={styles["sub-header"]}>
       <div className={styles.container}>
@@ -33,7 +33,9 @@ const MenuBar = () => {
                 className="main-item"
                 data-view-all="/it-it/industries-it"
               >
-                <a href="https://www.bdo.it/it-it/industries-it">Industries</a>
+                <a href="#" onClick={props.showList}>
+                  List
+                </a>
               </span>
             </li>
             <li>

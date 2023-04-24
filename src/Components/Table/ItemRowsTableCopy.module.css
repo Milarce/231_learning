@@ -21,29 +21,14 @@
   text-indent: 5px;
 }
 
+li {
+  list-style: none;
+}
+
 .normal {
   height: 37px;
 }
 
 .large {
-  height: 185px;
-}
-
-li {
-  list-style: none;
-}
-
-.one-size {
-  flex: 1;
-}
-
-.two-size {
-  flex: 2;
-}
-.four-size {
-  flex: 4;
-}
-
-.seven-size {
-  flex: 7;
+  height: 74px;
 }

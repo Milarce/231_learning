@@ -1,10 +1,29 @@
 @import url("https://fonts.cdnfonts.com/css/proxima-nova-2");
 
 .grid-container {
+  width: 85%;
+  margin: 3rem auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(10, auto);
   column-gap: 4px;
+  row-gap: 4px;
+}
+
+.el--header {
+  padding-top: 1rem;
+}
+
+.el--rows {
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+  font-size: 1.5rem;
+  font-family: "Proxima Nova", "Trebuchet MS", Tahoma, sans-serif;
+}
+
+.el--rows:focus {
+  outline: none;
 }
 
 .el--1 {
@@ -55,15 +74,4 @@
 .el--10 {
   grid-row: 5/9;
   grid-column: 3/5;
-}
-
-textarea {
-  height: 20rem;
-  border: none;
-  resize: none;
-  font-family: "Proxima Nova", "Trebuchet MS", Tahoma, sans-serif;
-}
-
-textarea:focus {
-  outline: none;
 }

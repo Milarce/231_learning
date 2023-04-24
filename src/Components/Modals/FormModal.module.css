@@ -1,0 +1,36 @@
+@import url("https://fonts.cdnfonts.com/css/proxima-nova-2");
+
+.modal-container {
+  width: 80%;
+  display: grid;
+  background-color: #e7e7e7;
+}
+
+.modal-header {
+  background: #323232;
+  padding: 1rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.modal-footer {
+  background-color: transparent;
+  display: flex;
+  height: 45px;
+  gap: 4px;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+
+.btn-container {
+  justify-content: flex-end;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+footer.modal-footer.btn-container > * {
+  flex: 0 1 72px;
+}

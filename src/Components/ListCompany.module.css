@@ -13,6 +13,14 @@
   padding: 0;
 }
 
+.btn-container {
+  justify-content: flex-end;
+}
+
+footer.table.btn-container > * {
+  flex: 0 1 72px;
+}
+
 .item {
   background: white;
 }
