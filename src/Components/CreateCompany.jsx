@@ -56,89 +56,96 @@ const CreateCompany = (props) => {
 
   return (
     <React.Fragment>
-      <FormModal headerText={"Crea nuova azienda"}>
-        <form className={styles["grid-container"]} onSubmit={submitHandler}>
-          <div className={styles["el--1"]}>
-            <ItemHeaderTable text={props.headers[0]} size={["one-size"]} />
-          </div>
-          <div className={styles["el--2"]}>
-            <ItemRowsTable size={"normal"}>
-              <span>Id</span>
-            </ItemRowsTable>
-          </div>
-          <div className={styles["el--3"]}>
-            <ItemHeaderTable text={props.headers[1]} size={"one-size"} />
-          </div>
-          <div className={styles["el--4"]}>
-            <ItemRowsTable size={"normal"}>
-              <input
-                className={styles["el--rows"]}
-                name="companyName"
-                type="text"
-                maxLength={50}
-                placeholder="Azienda - Formazione 231 (anno)"
-                ref={companyNameRef}
-              />
-            </ItemRowsTable>
-          </div>
-          <div className={`${styles["el--5"]} ${styles["el--header"]}`}>
-            <ItemHeaderTable text={props.headers[4]} size={"two-size"} />
-          </div>
-          <div className={styles["el--6"]}>
-            <ItemRowsTable size={"normal"}>
-              <input
-                className={styles.upload}
-                id="upload-img"
-                type="file"
-                onChange={handleImgChange}
-              />
-              <label
-                className={`${styles.list} ${styles.item} ${styles.fifth} ${
-                  imgFile ? styles.blacking : ""
-                }`}
-                htmlFor="upload-img"
-              >
-                Scegli logo
-              </label>
-            </ItemRowsTable>
-          </div>
-          <div className={`${styles["el--7"]} ${styles["el--header"]}`}>
-            <ItemHeaderTable text={props.headers[3]} size={"two-size"} />
-          </div>
-          <div className={styles["el--8"]}>
-            <ItemRowsTable size={"normal"}>
-              <input
-                className={styles.upload}
-                id="upload-doc"
-                type="file"
-                onChange={handleFileChange}
-              />
-              <label
-                className={`${styles.list} ${styles.item} ${styles.fourth} ${
-                  docFile ? styles.blacking : ""
-                }`}
-                htmlFor="upload-doc"
-              >
-                Scegli document
-              </label>
-            </ItemRowsTable>
-          </div>
-          <div className={`${styles["el--9"]} ${styles["el--header"]}`}>
-            <ItemHeaderTable text={props.headers[2]} size={"two-size"} />
-          </div>
-          <div className={styles["el--10"]}>
-            <ItemRowsTable size={"normal"}>
-              <input
-                className={styles["el--rows"]}
-                name="questionsName"
-                type="text"
-                maxLength={150}
-                ref={questionsNameRef}
-              />
-            </ItemRowsTable>
-          </div>
-        </form>
-      </FormModal>
+      <div className={styles.backdrop} />
+      <div className={styles.overlay}>
+        <FormModal
+          headerText={"Crea nuova azienda"}
+          btnText={"Crea"}
+          headerType={"create-header"}
+        >
+          <form className={styles["grid-container"]} onSubmit={submitHandler}>
+            <div className={styles["el--1"]}>
+              <ItemHeaderTable text={props.headers[0]} size={["one-size"]} />
+            </div>
+            <div className={styles["el--2"]}>
+              <ItemRowsTable size={"normal"}>
+                <span>Id</span>
+              </ItemRowsTable>
+            </div>
+            <div className={styles["el--3"]}>
+              <ItemHeaderTable text={props.headers[1]} size={"one-size"} />
+            </div>
+            <div className={styles["el--4"]}>
+              <ItemRowsTable size={"normal"}>
+                <input
+                  className={styles["el--rows"]}
+                  name="companyName"
+                  type="text"
+                  maxLength={50}
+                  placeholder="Azienda - Formazione 231 (anno)"
+                  ref={companyNameRef}
+                />
+              </ItemRowsTable>
+            </div>
+            <div className={`${styles["el--5"]} ${styles["el--header"]}`}>
+              <ItemHeaderTable text={props.headers[4]} size={"two-size"} />
+            </div>
+            <div className={styles["el--6"]}>
+              <ItemRowsTable size={"normal"}>
+                <input
+                  className={styles.upload}
+                  id="upload-img"
+                  type="file"
+                  onChange={handleImgChange}
+                />
+                <label
+                  className={`${styles.list} ${styles.item} ${styles.fifth} ${
+                    imgFile ? styles.blacking : ""
+                  }`}
+                  htmlFor="upload-img"
+                >
+                  Scegli logo
+                </label>
+              </ItemRowsTable>
+            </div>
+            <div className={`${styles["el--7"]} ${styles["el--header"]}`}>
+              <ItemHeaderTable text={props.headers[3]} size={"two-size"} />
+            </div>
+            <div className={styles["el--8"]}>
+              <ItemRowsTable size={"normal"}>
+                <input
+                  className={styles.upload}
+                  id="upload-doc"
+                  type="file"
+                  onChange={handleFileChange}
+                />
+                <label
+                  className={`${styles.list} ${styles.item} ${styles.fourth} ${
+                    docFile ? styles.blacking : ""
+                  }`}
+                  htmlFor="upload-doc"
+                >
+                  Scegli document
+                </label>
+              </ItemRowsTable>
+            </div>
+            <div className={`${styles["el--9"]} ${styles["el--header"]}`}>
+              <ItemHeaderTable text={props.headers[2]} size={"two-size"} />
+            </div>
+            <div className={styles["el--10"]}>
+              <ItemRowsTable size={"normal"}>
+                <input
+                  className={styles["el--rows"]}
+                  name="questionsName"
+                  type="text"
+                  maxLength={150}
+                  ref={questionsNameRef}
+                />
+              </ItemRowsTable>
+            </div>
+          </form>
+        </FormModal>
+      </div>
     </React.Fragment>
   );
 };

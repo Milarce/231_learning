@@ -7,7 +7,11 @@ const MessageModal = (props) => {
     <React.Fragment>
       <div className={styles.backdrop} />
       <div className={styles.overlay}>
-        <FormModal headerText={props.title} btnText={"Chiudi"}>
+        <FormModal
+          headerText={props.title}
+          btnText={"Chiudi"}
+          headerType={"error-header"}
+        >
           <p className={styles["body-text"]}>{props.msgText}</p>
         </FormModal>
       </div>

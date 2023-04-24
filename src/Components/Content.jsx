@@ -39,27 +39,31 @@ const Content = () => {
   return (
     <section className={styles.section}>
       <div className={styles.content}>
-        <MessageModal
-          title={"Error!"}
-          msgText={"Upsss! Something went wrong"}
-        />
         <ListCompany
           headerText={companyHeaderTexts}
           sizeArr={companyStylesArr}
           companiesDetails={extractCompanyDetails(companies)}
         />
-        <CreateCompany
-          headers={companyHeaderTexts}
-          sizeArr={companyStylesArr}
-        />
         <EditCompany
           headerText={companyHeaderTexts}
           sizeArr={companyStylesArr}
         />
-        <EditStep stepName={hardCodedStep} />
       </div>
     </section>
   );
 };
 
 export default Content;
+
+/*
+<EditStep stepName={hardCodedStep} />
+
+<CreateCompany
+  headers={companyHeaderTexts}
+  sizeArr={companyStylesArr}
+/>
+<MessageModal
+  title={"Error!"}
+  msgText={"Upsss! Something went wrong"}
+/>
+*/

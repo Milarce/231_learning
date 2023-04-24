@@ -9,9 +9,8 @@ const FormModal = (props) => {
   };
   return (
     <React.Fragment>
-      <div className={styles.backdrop} />
       <div className={styles["modal-container"]}>
-        <header className={styles["modal-header"]}>
+        <header className={`${styles.header} ${styles[props.headerType]}`}>
           <h2>{props.headerText}</h2>
         </header>
         <div>{props.children}</div>

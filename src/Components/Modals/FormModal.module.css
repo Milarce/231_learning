@@ -6,14 +6,23 @@
   background-color: #e7e7e7;
 }
 
-.modal-header {
-  background: #323232;
-  padding: 1rem;
+.error-header {
+  background: #ed1a3b;
 }
 
-.modal-header h2 {
+.success-header {
+  background: #22409a;
+}
+
+.create-header {
+  background: #323232;
+}
+
+.header h2 {
   margin: 0;
   color: #fff;
+  padding: 1rem;
+  font-size: 2rem;
 }
 
 .modal-footer {
