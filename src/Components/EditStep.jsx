@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./EditStep.module.css";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
 import FormModal from "./Modals/FormModal";
 import ItemRowsTable from "./Table/ItemRowsTable";
 
 const EditStep = (props) => {
-  const getForwardMail = () => {};
-  const getForwardDays = () => {};
-  const getBodyMail = () => {};
-  const getBodyPage = () => {};
+  const mailNumber = useRef();
+  const daysNumber = useRef();
+  const bodyMail = useRef();
+  const bodyPage = useRef();
+
+  const validation = () => {
+    return (
+      mailNumber.current.value &&
+      daysNumber.current.value &&
+      bodyMail.current.value &&
+      bodyPage.current.value &&
+      true
+    );
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (!validation()) {
+      alert("Tutti campi sono obbligatori");
+    } else {
+      const stepObj = {
+        noSolleciti: mailNumber.current.value,
+        giorniSollecito: daysNumber.current.value,
+        bodyMail: bodyMail.current.value,
+        bodyPage: bodyPage.current.value,
+      };
+      props.onClose();
+      return props.onModify(stepObj);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -18,6 +44,8 @@ const EditStep = (props) => {
           headerText={"Modifica fase"}
           btnText={"Modifica"}
           headerType={"create-header"}
+          onClose={props.onClose}
+          onSubmit={submitHandler}
         >
           <div className={styles["grid-container"]}>
             <div className={styles["el--1"]}>
@@ -38,7 +66,7 @@ const EditStep = (props) => {
                   name="forward"
                   type="number"
                   placeholder="0"
-                  ref={getForwardMail}
+                  ref={mailNumber}
                 />
               </ItemRowsTable>
             </div>
@@ -52,7 +80,7 @@ const EditStep = (props) => {
                   name="days"
                   type="number"
                   placeholder="0"
-                  ref={getForwardDays}
+                  ref={daysNumber}
                 />
               </ItemRowsTable>
             </div>
@@ -64,7 +92,7 @@ const EditStep = (props) => {
                 <textarea
                   className={styles["el--rows"]}
                   name="body-mail"
-                  ref={getBodyMail}
+                  ref={bodyMail}
                 ></textarea>
               </ItemRowsTable>
             </div>
@@ -77,7 +105,7 @@ const EditStep = (props) => {
                 <textarea
                   className={styles["el--rows"]}
                   name="body-pagina"
-                  ref={getBodyPage}
+                  ref={bodyPage}
                 ></textarea>
               </ItemRowsTable>
             </div>

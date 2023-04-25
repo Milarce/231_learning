@@ -23,14 +23,26 @@ const companyStylesArr = [
   "two-size",
 ];
 
+let selectedCompany;
+
 const Content = () => {
   const [IsVisible, setIsVisible] = useState(false);
-  const [CompanyArr, setCompanyArr] = useState(companies);
+  //const [CompanyArr, setCompanyArr] = useState(companies);
 
   const createNewCompany = (newCompany) => {
-    setCompanyArr((prevState) => {
-      return [...prevState, newCompany];
-    });
+    const company = { ...newCompany, fasi: companies.at(-1).fasi };
+    companies.push(company);
+    modifySelectedCompany(company.idAzienda);
+    /*setCompanyArr((prevState) => {
+      return [...prevState, company];
+    });*/
+    handleVisibility();
+  };
+
+  const modifySelectedCompany = (companyId) => {
+    selectedCompany = companies.find(
+      (company) => company.idAzienda === companyId
+    );
   };
 
   const handleVisibility = () => {
@@ -44,14 +56,16 @@ const Content = () => {
           <ListCompany
             headerText={companyHeaderTexts}
             sizeArr={companyStylesArr}
-            companies={CompanyArr}
+            //companies={CompanyArr}
+            companies={companies}
             onCreate={createNewCompany}
           />
         )}
-        {!IsVisible && (
+        {IsVisible && (
           <EditCompany
             headerText={companyHeaderTexts}
             sizeArr={companyStylesArr}
+            myCompany={selectedCompany}
           />
         )}
       </div>

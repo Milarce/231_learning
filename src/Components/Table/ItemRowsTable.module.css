@@ -21,6 +21,17 @@
   text-indent: 5px;
 }
 
+.item button {
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  padding-left: 2.3rem;
+}
+
+.item button:hover {
+  cursor: pointer;
+}
+
 .normal {
   height: 37px;
 }

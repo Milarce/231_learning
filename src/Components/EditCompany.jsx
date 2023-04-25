@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
-import companies from "../DATA/aziende.json";
 import RowsTable from "./Table/RowsTable";
 import EditStep from "./EditStep";
 import ListSteps from "./ListSteps";
@@ -38,24 +37,16 @@ const EditCompany = (props) => {
     "two-size",
   ];
   const setStylesFasi = ["one-size", "seven-size", "one-size"];
-  const hardcodedId = "31190";
 
-  const extractCompany = (companyId) => {
-    const companyObj = companies.find(
-      (company) => company.idAzienda === companyId
-    );
-    return companyObj;
-  };
-
-  const extractValues = (id) => {
-    const companyObj = extractCompany(id);
+  const extractValues = (companyObj) => {
+    //const companyObj = extractCompany(id);
     const values = Object.values(companyObj);
     return values.slice(0, 5);
   };
 
-  const extractStepsArr = (id) => {
-    const company = extractCompany(id);
-    const { fasi } = company;
+  const extractStepsArr = (companyObj) => {
+    //const company = extractCompany(id);
+    const { fasi } = companyObj;
     return fasi;
     /*
     const textArr = fasi.map((fase) => {
@@ -72,12 +63,12 @@ const EditCompany = (props) => {
     <React.Fragment>
       <CompanyLogo
         logoPath={logoCmpny}
-        companyName={extractCompany(hardcodedId).desAzienda}
+        companyName={props.myCompany.desAzienda}
       />
       <HeaderTable rows={props.headerText} sendStyles={props.sizeArr} />
 
       <RowsTable
-        rows={extractValues(hardcodedId)}
+        rows={extractValues(props.myCompany)}
         sendStyles={setStylesCompany}
       />
 
@@ -89,7 +80,7 @@ const EditCompany = (props) => {
         <ListSteps
           headerText={tableHeaderFasi}
           headerStyles={setStylesFasi}
-          stepsArr={extractStepsArr(hardcodedId)}
+          stepsArr={extractStepsArr(props.myCompany)}
           rowsStyles={setStylesFasi}
         />
       </div>
