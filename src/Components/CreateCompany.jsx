@@ -4,9 +4,7 @@ import companies from "../DATA/aziende.json";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
 import ItemRowsTable from "./Table/ItemRowsTable";
 import FormModal from "./Modals/FormModal";
-
-const newId = +companies.at(-1).idAzienda + 1;
-//<button onClick={handleUploadClick}>Upload</button>
+import MessageModal from "./Modals/MessageModal";
 
 const CreateCompany = (props) => {
   const [docFile, setDocFile] = useState();
@@ -38,20 +36,21 @@ const CreateCompany = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!validation()) return;
-    const tmpObj = {
-      idAzienda: newId,
-      desAzienda: companyNameRef.current.value,
-      DesQuestionario: questionsNameRef.current.value,
-      Documentation: "doc-Granarolo-link",
-      Images: "img-Granarolo-link",
-      MailMittente: "<learning@231workstation.com>",
-      fasi: [],
-    };
-    companies.push(tmpObj);
-    companies.forEach((item) => {
-      console.log(item);
-    });
+    if (!validation()) {
+      alert("Tutti campi sono obbligatori");
+    } else {
+      const tmpObj = {
+        idAzienda: props.newId,
+        desAzienda: companyNameRef.current.value,
+        DesQuestionario: questionsNameRef.current.value,
+        Documentation: docFile.name,
+        Images: imgFile.name,
+        MailMittente: "<learning@231workstation.com>",
+        fasi: [],
+      };
+      props.onClose();
+      return props.onCreate(tmpObj);
+    }
   };
 
   return (
@@ -62,6 +61,8 @@ const CreateCompany = (props) => {
           headerText={"Crea nuova azienda"}
           btnText={"Crea"}
           headerType={"create-header"}
+          onClose={props.onClose}
+          onSubmit={submitHandler}
         >
           <form className={styles["grid-container"]} onSubmit={submitHandler}>
             <div className={styles["el--1"]}>
@@ -69,7 +70,7 @@ const CreateCompany = (props) => {
             </div>
             <div className={styles["el--2"]}>
               <ItemRowsTable size={"normal"}>
-                <span>Id</span>
+                <span>{props.newId}</span>
               </ItemRowsTable>
             </div>
             <div className={styles["el--3"]}>
@@ -104,7 +105,7 @@ const CreateCompany = (props) => {
                   }`}
                   htmlFor="upload-img"
                 >
-                  Scegli logo
+                  {imgFile ? imgFile.name : "Scegli logo"}
                 </label>
               </ItemRowsTable>
             </div>
@@ -125,7 +126,7 @@ const CreateCompany = (props) => {
                   }`}
                   htmlFor="upload-doc"
                 >
-                  Scegli document
+                  {docFile ? docFile.name : "Scegli document"}
                 </label>
               </ItemRowsTable>
             </div>

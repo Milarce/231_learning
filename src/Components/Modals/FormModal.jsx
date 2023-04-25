@@ -3,10 +3,6 @@ import styles from "./FormModal.module.css";
 import Button from "../Miscellany/Button";
 
 const FormModal = (props) => {
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("La vida");
-  };
   return (
     <React.Fragment>
       <div className={styles["modal-container"]}>
@@ -17,12 +13,17 @@ const FormModal = (props) => {
         <footer
           className={`${styles["modal-footer"]} ${styles["btn-container"]}`}
         >
-          <Button btnType={"button"} btnText={"Annulla"} btnStyle={"back"} />
+          <Button
+            btnType={"button"}
+            btnText={"Annulla"}
+            btnStyle={"back"}
+            btnAction={props.onClose}
+          />
           <Button
             btnType={"submit"}
             btnText={props.btnText}
             btnStyle={"create"}
-            btnAction={submitHandler}
+            btnAction={props.onSubmit}
           />
         </footer>
       </div>
