@@ -8,6 +8,7 @@ import HeaderTable from "./Table/HeaderTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CompanyLogo from "./Miscellany/CompanyLogo";
+import Button from "./Miscellany/Button";
 
 /*<ul className={styles["table-header"]}>
             {tableHeaderFasi.map((item, i) => {
@@ -84,6 +85,14 @@ const EditCompany = (props) => {
           rowsStyles={setStylesFasi}
         />
       </div>
+      <footer className={`${styles.table} ${styles["btn-container"]}`}>
+        <Button
+          btnType={"button"}
+          btnAction={""}
+          btnText={"Fatto"}
+          btnStyle={"create"}
+        />
+      </footer>
     </React.Fragment>
   );
 };

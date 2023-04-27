@@ -9,8 +9,12 @@
   display: flex;
   height: 45px;
   gap: 4px;
-  margin: 4px 0 0 0;
+  margin: 3rem 0 0 0;
   padding: 0;
+  border-color: #323232;
+  border-top: 2px solid;
+  padding-right: 1rem;
+  padding-top: 1rem;
 }
 
 .btn-container {

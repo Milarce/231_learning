@@ -5,13 +5,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import EditStep from "./EditStep";
 
+let selectedStepiD;
+
 const ListSteps = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
 
-  const showStepWindow = () => {
+  const modifyStep = (stepObj) => {
+    console.log(stepObj);
+  };
+
+  const openModifyWindow = (e) => {
+    selectedStepiD = e.target.closest(".btn").id;
+    handlerVisibility();
+  };
+
+  const handlerVisibility = () => {
     setIsVisible(() => !IsVisible);
   };
-  const modifyStep = () => {};
 
   return (
     <React.Fragment>
@@ -21,7 +31,7 @@ const ListSteps = (props) => {
         const rowsText = [
           //Crea un array con los textos de cada celda
           ...faseValues.slice(0, 2),
-          <button onClick={showStepWindow}>
+          <button className="btn" id={i} onClick={openModifyWindow}>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>,
         ];
@@ -29,7 +39,14 @@ const ListSteps = (props) => {
           <RowsTable key={i} rows={rowsText} sendStyles={props.rowsStyles} />
         );
       })}
-      {IsVisible && <EditStep onClose={showStepWindow} onModify={modifyStep} />}
+
+      {IsVisible && (
+        <EditStep
+          stepName={props.stepsArr[selectedStepiD].Descrizione}
+          onClose={handlerVisibility}
+          onModify={modifyStep}
+        />
+      )}
     </React.Fragment>
   );
 };

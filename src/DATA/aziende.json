@@ -15,7 +15,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Granarolo",
+        "bodyPage": "Body page test Granarolo"
       },
       {
         "id": 1,
@@ -25,7 +27,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Granarolo",
+        "bodyPage": "Body page test Granarolo"
       },
       {
         "id": 2,
@@ -35,7 +39,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Granarolo",
+        "bodyPage": "Body page test Granarolo"
       },
       {
         "id": 3,
@@ -45,7 +51,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Granarolo",
+        "bodyPage": "Body page test Granarolo"
       },
       {
         "id": 4,
@@ -55,7 +63,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Granarolo",
+        "bodyPage": "Body page test Granarolo"
       },
       {
         "id": 5,
@@ -65,7 +75,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Granarolo",
+        "bodyPage": "Body page test Granarolo"
       }
     ]
   },
@@ -85,7 +97,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Ferrari",
+        "bodyPage": "Body page test Ferrari"
       },
       {
         "id": 1,
@@ -95,7 +109,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Ferrari",
+        "bodyPage": "Body page test Ferrari"
       },
       {
         "id": 2,
@@ -105,7 +121,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Ferrari",
+        "bodyPage": "Body page test Ferrari"
       },
       {
         "id": 3,
@@ -115,7 +133,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Ferrari",
+        "bodyPage": "Body page test Ferrari"
       },
       {
         "id": 4,
@@ -125,7 +145,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Ferrari",
+        "bodyPage": "Body page test Ferrari"
       },
       {
         "id": 5,
@@ -135,7 +157,9 @@
         "blobLink": "",
         "noSolleciti": 2,
         "giorniSollecito": "10",
-        "tipoFase": "Invito"
+        "tipoFase": "Invito",
+        "bodyMail": "Body mail test Ferrari",
+        "bodyPage": "Body page test Ferrari"
       }
     ]
   }
