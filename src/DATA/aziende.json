@@ -9,7 +9,7 @@
     "fasi": [
       {
         "id": 0,
-        "Descrizione": "Mail invito scarico documentazione",
+        "descrizione": "Mail invito scarico documentazione",
         "blobId": 264,
         "blobTags": "Granarolo-soloconsegna.docs",
         "blobLink": "",
@@ -21,7 +21,7 @@
       },
       {
         "id": 1,
-        "Descrizione": "Invito ricevuto - In attesa presa visione documentazione",
+        "descrizione": "Invito ricevuto - In attesa presa visione documentazione",
         "blobId": 264,
         "blobTags": "Granarolo-soloconsegna.docs",
         "blobLink": "",
@@ -33,7 +33,7 @@
       },
       {
         "id": 2,
-        "Descrizione": "Mail invito compilazione questionario",
+        "descrizione": "Mail invito compilazione questionario",
         "blobId": 264,
         "blobTags": "Granarolo-soloconsegna.docs",
         "blobLink": "",
@@ -45,7 +45,7 @@
       },
       {
         "id": 3,
-        "Descrizione": "Invito questionario ricevuto - In attesa adesione modello",
+        "descrizione": "Invito questionario ricevuto - In attesa adesione modello",
         "blobId": 264,
         "blobTags": "Granarolo-soloconsegna.docs",
         "blobLink": "",
@@ -57,7 +57,7 @@
       },
       {
         "id": 4,
-        "Descrizione": "Adesione confermata - Questionario da compilare",
+        "descrizione": "Adesione confermata - Questionario da compilare",
         "blobId": 264,
         "blobTags": "Granarolo-soloconsegna.docs",
         "blobLink": "",
@@ -69,7 +69,7 @@
       },
       {
         "id": 5,
-        "Descrizione": "Questionario completato - Esito commentato",
+        "descrizione": "Questionario completato - Esito commentato",
         "blobId": 264,
         "blobTags": "Granarolo-soloconsegna.docs",
         "blobLink": "",
@@ -91,7 +91,7 @@
     "fasi": [
       {
         "id": 0,
-        "Descrizione": "Mail invito scarico documentazione",
+        "descrizione": "Mail invito scarico documentazione",
         "blobId": 264,
         "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",
@@ -103,7 +103,7 @@
       },
       {
         "id": 1,
-        "Descrizione": "Invito ricevuto - In attesa presa visione documentazione",
+        "descrizione": "Invito ricevuto - In attesa presa visione documentazione",
         "blobId": 264,
         "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",
@@ -115,7 +115,7 @@
       },
       {
         "id": 2,
-        "Descrizione": "Mail invito compilazione questionario",
+        "descrizione": "Mail invito compilazione questionario",
         "blobId": 264,
         "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",
@@ -127,7 +127,7 @@
       },
       {
         "id": 3,
-        "Descrizione": "Invito questionario ricevuto - In attesa adesione modello",
+        "descrizione": "Invito questionario ricevuto - In attesa adesione modello",
         "blobId": 264,
         "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",
@@ -139,7 +139,7 @@
       },
       {
         "id": 4,
-        "Descrizione": "Adesione confermata - Questionario da compilare",
+        "descrizione": "Adesione confermata - Questionario da compilare",
         "blobId": 264,
         "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",
@@ -151,7 +151,7 @@
       },
       {
         "id": 5,
-        "Descrizione": "Questionario completato - Esito commentato",
+        "descrizione": "Questionario completato - Esito commentato",
         "blobId": 264,
         "blobTags": "Ferrari-soloconsegna.docs",
         "blobLink": "",

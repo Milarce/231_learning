@@ -30,19 +30,21 @@ const Content = () => {
   //const [CompanyArr, setCompanyArr] = useState(companies);
 
   const createNewCompany = (newCompany) => {
-    const company = { ...newCompany, fasi: companies.at(-1).fasi };
+    const company = { ...newCompany, fasi: [...companies.at(-1).fasi] };
     companies.push(company);
-    modifySelectedCompany(company.idAzienda);
-    /*setCompanyArr((prevState) => {
-      return [...prevState, company];
-    });*/
+    selectedCompany = modifySelectedCompany(company.idAzienda);
+
     handleVisibility();
   };
 
+  const updateCompany = (stepObj) => {
+    //---NO SE ESCOGE ASI LA AZIENDA---
+    selectedCompany.fasi[stepObj.id] = { ...stepObj };
+    console.log(companies);
+  };
+
   const modifySelectedCompany = (companyId) => {
-    selectedCompany = companies.find(
-      (company) => company.idAzienda === companyId
-    );
+    return companies.find((company) => company.idAzienda === companyId);
   };
 
   const handleVisibility = () => {
@@ -56,7 +58,6 @@ const Content = () => {
           <ListCompany
             headerText={companyHeaderTexts}
             sizeArr={companyStylesArr}
-            //companies={CompanyArr}
             companies={companies}
             onCreate={createNewCompany}
           />
@@ -66,6 +67,8 @@ const Content = () => {
             headerText={companyHeaderTexts}
             sizeArr={companyStylesArr}
             myCompany={selectedCompany}
+            btnAction={handleVisibility}
+            updateCompany={updateCompany}
           />
         )}
       </div>

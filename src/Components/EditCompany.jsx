@@ -2,31 +2,12 @@ import React from "react";
 import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
 import RowsTable from "./Table/RowsTable";
-import EditStep from "./EditStep";
 import ListSteps from "./ListSteps";
 import HeaderTable from "./Table/HeaderTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CompanyLogo from "./Miscellany/CompanyLogo";
 import Button from "./Miscellany/Button";
-
-/*<ul className={styles["table-header"]}>
-            {tableHeaderFasi.map((item, i) => {
-              return (
-                <ItemHeaderTable key={i} text={item} size={setStylesFasi[i]} />
-              );
-            })}
-  </ul> */
-
-/*{extractSteps(hardcodedId).map((faseText, i) => {
-            return (
-              <RowsTableCopy
-                key={i}
-                rows={faseText}
-                sendStyles={setStylesFasi}
-              />
-            );
-          })}*/
 
 const EditCompany = (props) => {
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
@@ -49,16 +30,14 @@ const EditCompany = (props) => {
     //const company = extractCompany(id);
     const { fasi } = companyObj;
     return fasi;
-    /*
-    const textArr = fasi.map((fase) => {
-      const faseValues = Object.values(fase);
-      return [
-        ...faseValues.slice(0, 2),
-        <FontAwesomeIcon icon={faPenToSquare} />,
-      ];
-    });
-    return textArr;*/
   };
+  /*
+  const updateStep = (stepObj) => {
+    const company = { ...props.myCompany };
+    company.fasi[stepObj.id] = { ...stepObj };
+    console.log(company);
+  };
+  */
 
   return (
     <React.Fragment>
@@ -83,12 +62,13 @@ const EditCompany = (props) => {
           headerStyles={setStylesFasi}
           stepsArr={extractStepsArr(props.myCompany)}
           rowsStyles={setStylesFasi}
+          updateStep={props.updateCompany}
         />
       </div>
       <footer className={`${styles.table} ${styles["btn-container"]}`}>
         <Button
           btnType={"button"}
-          btnAction={""}
+          btnAction={props.btnAction}
           btnText={"Fatto"}
           btnStyle={"create"}
         />

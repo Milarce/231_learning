@@ -9,6 +9,7 @@ const EditStep = (props) => {
   const daysNumber = useRef();
   const bodyMail = useRef();
   const bodyPage = useRef();
+  const descrizione = useRef();
 
   const validation = () => {
     return (
@@ -26,6 +27,8 @@ const EditStep = (props) => {
       alert("Tutti campi sono obbligatori");
     } else {
       const stepObj = {
+        id: props.stepName.id,
+        descrizione: descrizione.current.value,
         noSolleciti: mailNumber.current.value,
         giorniSollecito: daysNumber.current.value,
         bodyMail: bodyMail.current.value,
@@ -53,7 +56,13 @@ const EditStep = (props) => {
             </div>
             <div className={styles["el--2"]}>
               <ItemRowsTable size={"normal"}>
-                <span>{props.stepName}</span>
+                <input
+                  className={styles["el--rows"]}
+                  name="forward"
+                  type="text"
+                  defaultValue={props.stepName.descrizione}
+                  ref={descrizione}
+                />
               </ItemRowsTable>
             </div>
             <div className={styles["el--3"]}>
@@ -65,7 +74,7 @@ const EditStep = (props) => {
                   className={styles["el--rows"]}
                   name="forward"
                   type="number"
-                  placeholder="0"
+                  defaultValue={props.stepName.noSolleciti}
                   ref={mailNumber}
                 />
               </ItemRowsTable>
@@ -79,7 +88,7 @@ const EditStep = (props) => {
                   className={styles["el--rows"]}
                   name="days"
                   type="number"
-                  placeholder="0"
+                  defaultValue={props.stepName.giorniSollecito}
                   ref={daysNumber}
                 />
               </ItemRowsTable>
@@ -92,6 +101,7 @@ const EditStep = (props) => {
                 <textarea
                   className={styles["el--rows"]}
                   name="body-mail"
+                  defaultValue={props.stepName.bodyMail}
                   ref={bodyMail}
                 ></textarea>
               </ItemRowsTable>
@@ -105,6 +115,7 @@ const EditStep = (props) => {
                 <textarea
                   className={styles["el--rows"]}
                   name="body-pagina"
+                  defaultValue={props.stepName.bodyPage}
                   ref={bodyPage}
                 ></textarea>
               </ItemRowsTable>
