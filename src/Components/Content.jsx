@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Content.module.css";
 import ListCompany from "./ListCompany";
-//import CreateCompany from "./CreateCompany";
 import EditCompany from "./EditCompany";
 import companies from "../DATA/aziende.json";
-//import EditStep from "./EditStep";
 //import MessageModal from "./Modals/MessageModal";
 
 const companyHeaderTexts = [
@@ -13,6 +11,7 @@ const companyHeaderTexts = [
   "Questionario",
   "Documentazione",
   "Logo",
+  "Modifica",
 ];
 
 const companyStylesArr = [
@@ -21,29 +20,38 @@ const companyStylesArr = [
   "seven-size",
   "two-size",
   "two-size",
+  "one-size",
 ];
 
 let selectedCompany;
 
 const Content = () => {
   const [IsVisible, setIsVisible] = useState(false);
-  //const [CompanyArr, setCompanyArr] = useState(companies);
 
-  const createNewCompany = (newCompany) => {
-    const company = { ...newCompany, fasi: [...companies.at(-1).fasi] };
-    companies.push(company);
-    selectedCompany = modifySelectedCompany(company.idAzienda);
-
+  const updateCompanyArr = (companyObj) => {
+    if (findSelectedCompany(companyObj.idAzienda)) {
+      const cmpnyIndex = companies.indexOf(
+        findSelectedCompany(companyObj.idAzienda)
+      );
+      companies[cmpnyIndex] = { ...companyObj };
+      console.log(companies[cmpnyIndex]);
+    } else {
+      selectedCompany = { ...companyObj };
+      companies.push(selectedCompany);
+    }
     handleVisibility();
   };
 
-  const updateCompany = (stepObj) => {
-    //---NO SE ESCOGE ASI LA AZIENDA---
+  const updateSteps = (stepObj) => {
     selectedCompany.fasi[stepObj.id] = { ...stepObj };
-    console.log(companies);
   };
 
-  const modifySelectedCompany = (companyId) => {
+  const editCompany = (companyObj) => {
+    selectedCompany = { ...companyObj };
+    handleVisibility();
+  };
+
+  const findSelectedCompany = (companyId) => {
     return companies.find((company) => company.idAzienda === companyId);
   };
 
@@ -59,7 +67,8 @@ const Content = () => {
             headerText={companyHeaderTexts}
             sizeArr={companyStylesArr}
             companies={companies}
-            onCreate={createNewCompany}
+            onCreate={updateCompanyArr}
+            onUpdate={editCompany}
           />
         )}
         {IsVisible && (
@@ -68,7 +77,8 @@ const Content = () => {
             sizeArr={companyStylesArr}
             myCompany={selectedCompany}
             btnAction={handleVisibility}
-            updateCompany={updateCompany}
+            updateSteps={updateSteps}
+            onCreate={updateCompanyArr}
           />
         )}
       </div>
@@ -77,26 +87,3 @@ const Content = () => {
 };
 
 export default Content;
-
-/*
-<EditStep stepName={hardCodedStep} />
-
-<CreateCompany
-headers={companyHeaderTexts}
-sizeArr={companyStylesArr}
-/>
-<MessageModal
-title={"Error!"}
-msgText={"Upsss! Something went wrong"}
-/>
-*/
-
-/*
-const extractCompanyDetails = (companiesArr) => {
-  const detailsArr = companiesArr.map((cmpy) => {
-    const values = Object.values(cmpy);
-    return values.slice(0, 5);
-  });
-  return detailsArr;
-};
-*/

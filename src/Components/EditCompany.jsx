@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
 import RowsTable from "./Table/RowsTable";
 import ListSteps from "./ListSteps";
 import HeaderTable from "./Table/HeaderTable";
+import CreateCompany from "./CreateCompany";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CompanyLogo from "./Miscellany/CompanyLogo";
@@ -11,33 +12,28 @@ import Button from "./Miscellany/Button";
 
 const EditCompany = (props) => {
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
-  const setStylesCompany = [
-    "one-size",
-    "four-size",
-    "seven-size",
-    "two-size",
-    "two-size",
-  ];
   const setStylesFasi = ["one-size", "seven-size", "one-size"];
 
+  const [IsVisible, setIsVisible] = useState(false);
+
+  const showUpdateWindow = () => {
+    setIsVisible(() => !IsVisible);
+  };
+
   const extractValues = (companyObj) => {
-    //const companyObj = extractCompany(id);
     const values = Object.values(companyObj);
-    return values.slice(0, 5);
+    return [
+      ...values.slice(0, 5),
+      <button className="btn" onClick={showUpdateWindow}>
+        <FontAwesomeIcon icon={faPenToSquare} />
+      </button>,
+    ];
   };
 
   const extractStepsArr = (companyObj) => {
-    //const company = extractCompany(id);
     const { fasi } = companyObj;
     return fasi;
   };
-  /*
-  const updateStep = (stepObj) => {
-    const company = { ...props.myCompany };
-    company.fasi[stepObj.id] = { ...stepObj };
-    console.log(company);
-  };
-  */
 
   return (
     <React.Fragment>
@@ -49,7 +45,7 @@ const EditCompany = (props) => {
 
       <RowsTable
         rows={extractValues(props.myCompany)}
-        sendStyles={setStylesCompany}
+        sendStyles={props.sizeArr}
       />
 
       <div className={styles["steps-container"]}>
@@ -62,7 +58,7 @@ const EditCompany = (props) => {
           headerStyles={setStylesFasi}
           stepsArr={extractStepsArr(props.myCompany)}
           rowsStyles={setStylesFasi}
-          updateStep={props.updateCompany}
+          updateStep={props.updateSteps}
         />
       </div>
       <footer className={`${styles.table} ${styles["btn-container"]}`}>
@@ -73,6 +69,18 @@ const EditCompany = (props) => {
           btnStyle={"create"}
         />
       </footer>
+      {IsVisible && (
+        <CreateCompany
+          headers={props.headerText}
+          onClose={showUpdateWindow}
+          companyData={props.myCompany}
+          onCreate={props.onCreate}
+          windowsType={{
+            headerText: "Modifica azienda",
+            btnText: "Fatto",
+          }}
+        />
+      )}
     </React.Fragment>
   );
 };

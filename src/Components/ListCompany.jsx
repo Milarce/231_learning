@@ -6,18 +6,31 @@ import Button from "./Miscellany/Button";
 import CompanyLogo from "./Miscellany/CompanyLogo";
 import logoLearning from "../img/logo/logo_231/231-logo-color.png";
 import CreateCompany from "./CreateCompany";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const ListCompany = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
 
-  const showCompanyWindow = () => {
+  const showCreateWindow = () => {
     setIsVisible(() => !IsVisible);
   };
 
+  const modifySelectedCompany = (e) => {
+    const selCompanyId = e.target.closest(".btn").id;
+    const selCompany = props.companies[selCompanyId];
+    props.onUpdate(selCompany);
+  };
+
   const extractCompanyDetails = (companiesArr) => {
-    const detailsArr = companiesArr.map((cmpy) => {
+    const detailsArr = companiesArr.map((cmpy, i) => {
       const values = Object.values(cmpy);
-      return values.slice(0, 5);
+      return [
+        ...values.slice(0, 5),
+        <button id={i} className="btn" onClick={modifySelectedCompany}>
+          <FontAwesomeIcon icon={faPenToSquare} />
+        </button>,
+      ];
     });
     return detailsArr;
   };
@@ -34,15 +47,22 @@ const ListCompany = (props) => {
           btnType={"submit"}
           btnText={"Crea Azienda"}
           btnStyle={"create"}
-          btnAction={showCompanyWindow}
+          btnAction={showCreateWindow}
         />
       </footer>
       {IsVisible && (
         <CreateCompany
           headers={props.headerText}
-          onClose={showCompanyWindow}
-          newId={+props.companies.at(-1).idAzienda + 1}
+          onClose={showCreateWindow}
+          companyData={{
+            idAzienda: +props.companies.at(-1).idAzienda + 1, //Takes last id and adds 1 to set the new id
+            fasi: props.companies.at(-1).fasi, //Takes the last company steps to the new company
+          }}
           onCreate={props.onCreate}
+          windowsType={{
+            headerText: "Crea nuova azienda",
+            btnText: "Crea",
+          }}
         />
       )}
     </React.Fragment>

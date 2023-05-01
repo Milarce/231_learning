@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useState, useRef } from "react";
 import styles from "./CreateCompany.module.css";
-import companies from "../DATA/aziende.json";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
 import ItemRowsTable from "./Table/ItemRowsTable";
 import FormModal from "./Modals/FormModal";
-import MessageModal from "./Modals/MessageModal";
+//import MessageModal from "./Modals/MessageModal";
 
 const CreateCompany = (props) => {
   const [docFile, setDocFile] = useState();
@@ -39,17 +38,17 @@ const CreateCompany = (props) => {
     if (!validation()) {
       alert("Tutti campi sono obbligatori");
     } else {
-      const tmpObj = {
-        idAzienda: props.newId,
+      const companyObj = {
+        idAzienda: props.companyData.idAzienda,
         desAzienda: companyNameRef.current.value,
         DesQuestionario: questionsNameRef.current.value,
         Documentation: docFile.name,
         Images: imgFile.name,
         MailMittente: "<learning@231workstation.com>",
-        fasi: [],
+        fasi: props.companyData.fasi,
       };
       props.onClose();
-      return props.onCreate(tmpObj);
+      return props.onCreate(companyObj);
     }
   };
 
@@ -58,8 +57,8 @@ const CreateCompany = (props) => {
       <div className={styles.backdrop} />
       <div className={styles.overlay}>
         <FormModal
-          headerText={"Crea nuova azienda"}
-          btnText={"Crea"}
+          headerText={props.windowsType.headerText}
+          btnText={props.windowsType.btnText}
           headerType={"create-header"}
           onClose={props.onClose}
           onSubmit={submitHandler}
@@ -70,7 +69,7 @@ const CreateCompany = (props) => {
             </div>
             <div className={styles["el--2"]}>
               <ItemRowsTable size={"normal"}>
-                <span>{props.newId}</span>
+                <span>{props.companyData.idAzienda}</span>
               </ItemRowsTable>
             </div>
             <div className={styles["el--3"]}>
@@ -84,6 +83,7 @@ const CreateCompany = (props) => {
                   type="text"
                   maxLength={50}
                   placeholder="Azienda - Formazione 231 (anno)"
+                  defaultValue={props.companyData.desAzienda}
                   ref={companyNameRef}
                 />
               </ItemRowsTable>
@@ -140,6 +140,7 @@ const CreateCompany = (props) => {
                   name="questionsName"
                   type="text"
                   maxLength={150}
+                  defaultValue={props.companyData.DesQuestionario}
                   ref={questionsNameRef}
                 />
               </ItemRowsTable>
