@@ -1,8 +1,9 @@
-import React, { ChangeEvent, useState, useRef } from "react";
+import React, { ChangeEvent, useState, useRef, useContext } from "react";
 import styles from "./CreateCompany.module.css";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
 import ItemRowsTable from "./Table/ItemRowsTable";
 import FormModal from "./Modals/FormModal";
+import UpdateContext from "../Store/update-context";
 //import MessageModal from "./Modals/MessageModal";
 
 const CreateCompany = (props) => {
@@ -10,6 +11,8 @@ const CreateCompany = (props) => {
   const [imgFile, setImgFile] = useState();
   const companyNameRef = useRef();
   const questionsNameRef = useRef();
+
+  const ctx = useContext(UpdateContext);
 
   const validation = () => {
     return (
@@ -48,7 +51,7 @@ const CreateCompany = (props) => {
         fasi: props.companyData.fasi,
       };
       props.onClose();
-      return props.onCreate(companyObj);
+      return ctx.handleCompany(companyObj);
     }
   };
 

@@ -39,7 +39,6 @@ const ListSteps = (props) => {
         <EditStep
           stepName={props.stepsArr[selectedStepId]}
           onClose={handlerVisibility}
-          onModify={props.updateStep}
         />
       )}
     </React.Fragment>

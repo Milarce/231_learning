@@ -1,10 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import styles from "./EditStep.module.css";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
 import FormModal from "./Modals/FormModal";
 import ItemRowsTable from "./Table/ItemRowsTable";
+import UpdateContext from "../Store/update-context";
 
 const EditStep = (props) => {
+  const ctx = useContext(UpdateContext);
+
   const mailNumber = useRef();
   const daysNumber = useRef();
   const bodyMail = useRef();
@@ -35,7 +38,7 @@ const EditStep = (props) => {
         bodyPage: bodyPage.current.value,
       };
       props.onClose();
-      return props.onModify(stepObj);
+      return ctx.updateSteps(stepObj);
     }
   };
 

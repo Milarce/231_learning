@@ -13,7 +13,7 @@ const ListCompany = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
 
   const showCreateWindow = () => {
-    setIsVisible(() => !IsVisible);
+    setIsVisible((prevIsVisible) => !prevIsVisible);
   };
 
   const modifySelectedCompany = (e) => {
@@ -24,9 +24,19 @@ const ListCompany = (props) => {
 
   const extractCompanyDetails = (companiesArr) => {
     const detailsArr = companiesArr.map((cmpy, i) => {
-      const values = Object.values(cmpy);
+      const date = new Date(cmpy.createdAt); //La fecha leida del DB viene como STRING
+      const formatDate = new Intl.DateTimeFormat(navigator.language).format(
+        date
+      );
+      const values = [
+        cmpy.IdAzienda,
+        cmpy.DesAzienda,
+        cmpy.PathDoc,
+        cmpy.IdGruppoAzienda,
+        formatDate,
+      ];
       return [
-        ...values.slice(0, 5),
+        ...values,
         <button id={i} className="btn" onClick={modifySelectedCompany}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>,
@@ -58,7 +68,6 @@ const ListCompany = (props) => {
             idAzienda: +props.companies.at(-1).idAzienda + 1, //Takes last id and adds 1 to set the new id
             fasi: props.companies.at(-1).fasi, //Takes the last company steps to the new company
           }}
-          onCreate={props.onCreate}
           windowsType={{
             headerText: "Crea nuova azienda",
             btnText: "Crea",

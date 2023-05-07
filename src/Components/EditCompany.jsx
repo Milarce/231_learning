@@ -17,7 +17,7 @@ const EditCompany = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
 
   const showUpdateWindow = () => {
-    setIsVisible(() => !IsVisible);
+    setIsVisible((prevIsVisible) => !prevIsVisible);
   };
 
   const extractValues = (companyObj) => {
@@ -58,7 +58,6 @@ const EditCompany = (props) => {
           headerStyles={setStylesFasi}
           stepsArr={extractStepsArr(props.myCompany)}
           rowsStyles={setStylesFasi}
-          updateStep={props.updateSteps}
         />
       </div>
       <footer className={`${styles.table} ${styles["btn-container"]}`}>
@@ -74,7 +73,6 @@ const EditCompany = (props) => {
           headers={props.headerText}
           onClose={showUpdateWindow}
           companyData={props.myCompany}
-          onCreate={props.onCreate}
           windowsType={{
             headerText: "Modifica azienda",
             btnText: "Fatto",
