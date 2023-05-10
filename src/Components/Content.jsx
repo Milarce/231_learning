@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Content.module.css";
 import ListCompany from "./ListCompany";
 import EditCompany from "./EditCompany";
-import companies from "../DATA/aziende.json";
+//import companies from "../DATA/aziende.json";
 import UpdateContext from "../Store/update-context";
 import axios from "axios";
 //import MessageModal from "./Modals/MessageModal";
@@ -10,7 +10,7 @@ import axios from "axios";
 const companyHeaderTexts = [
   "ID",
   "Nome Azienda",
-  "Descrizione",
+  "Intervento Formativo",
   "Documentazione",
   "Creato",
   "Modifica",
@@ -26,17 +26,33 @@ const companyStylesArr = [
 ];
 
 let selectedCompany;
+let selectedSteps;
+let selectedSurvey;
 
 const Content = () => {
   const [IsVisible, setIsVisible] = useState(false);
-  const [receivedData, setReceivedData] = useState([]);
+  const [CompanyData, setCompanyData] = useState([]);
+  const [DesQuestionariArr, setDesQuestionariArr] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/aziende").then((response) => {
-      setReceivedData(response.data);
-    });
+    getData();
   }, []);
 
+  const getData = async () => {
+    try {
+      const getCompanies = axios.get("http://localhost:3001/aziende");
+      const getQuestionari = axios.get("http://localhost:3001/questionari");
+
+      const dataResp = await Promise.all([getCompanies, getQuestionari]);
+      console.log(dataResp);
+      setCompanyData(dataResp[0].data);
+      setDesQuestionariArr(dataResp[1].data);
+    } catch (err) {
+      console.error(new Error(err));
+    }
+  };
+
+  /* 
   const updateCompanyArr = (companyObj) => {
     if (findSelectedCompany(companyObj.idAzienda)) {
       const cmpnyIndex = companies.indexOf(
@@ -50,20 +66,27 @@ const Content = () => {
       companies.push(selectedCompany);
       handleVisibility();
     }
-  };
+  }; */
 
   const updateSteps = (stepObj) => {
     selectedCompany.fasi[stepObj.id] = { ...stepObj };
   };
 
-  const editCompany = (companyObj) => {
+  const editCompany = (companyObj, surveyObject) => {
     selectedCompany = { ...companyObj };
-    handleVisibility();
+    selectedSurvey = { ...surveyObject };
+    axios.get("http://localhost:3001/questionari-fasi").then((response) => {
+      const fasi = response.data.filter((item) => {
+        return item.IdAzienda === companyObj.IdAzienda;
+      });
+      selectedSteps = [...fasi];
+      handleVisibility();
+    });
   };
 
-  const findSelectedCompany = (companyId) => {
+  /* const findSelectedCompany = (companyId) => {
     return companies.find((company) => company.idAzienda === companyId);
-  };
+  }; */
 
   const handleVisibility = () => {
     setIsVisible(!IsVisible);
@@ -71,7 +94,11 @@ const Content = () => {
 
   return (
     <UpdateContext.Provider
-      value={{ updateSteps: updateSteps, handleCompany: updateCompanyArr }}
+      value={{
+        updateSteps: updateSteps,
+        //handleCompany: updateCompanyArr,
+        stepsArr: selectedSteps,
+      }}
     >
       <section className={styles.section}>
         <div className={styles.content}>
@@ -79,8 +106,9 @@ const Content = () => {
             <ListCompany
               headerText={companyHeaderTexts}
               sizeArr={companyStylesArr}
-              companies={receivedData}
-              onUpdate={editCompany}
+              companies={CompanyData}
+              DesQuestionariArr={DesQuestionariArr}
+              onSelected={editCompany}
             />
           )}
           {IsVisible && (
@@ -88,6 +116,7 @@ const Content = () => {
               headerText={companyHeaderTexts}
               sizeArr={companyStylesArr}
               myCompany={selectedCompany}
+              mySurvey={selectedSurvey}
               btnAction={handleVisibility}
             />
           )}

@@ -21,18 +21,22 @@ const EditCompany = (props) => {
   };
 
   const extractValues = (companyObj) => {
-    const values = Object.values(companyObj);
+    const date = new Date(companyObj.createdAt); //La fecha leida del DB viene como STRING
+    const formatDate = new Intl.DateTimeFormat(navigator.language).format(date);
+    const values = [
+      companyObj.IdAzienda,
+      companyObj.DesAzienda,
+      props.mySurvey.DesQuestionario,
+      companyObj.IdGruppoAzienda,
+      formatDate,
+    ];
+
     return [
-      ...values.slice(0, 5),
+      ...values,
       <button className="btn" onClick={showUpdateWindow}>
         <FontAwesomeIcon icon={faPenToSquare} />
       </button>,
     ];
-  };
-
-  const extractStepsArr = (companyObj) => {
-    const { fasi } = companyObj;
-    return fasi;
   };
 
   return (
@@ -56,7 +60,6 @@ const EditCompany = (props) => {
         <ListSteps
           headerText={tableHeaderFasi}
           headerStyles={setStylesFasi}
-          stepsArr={extractStepsArr(props.myCompany)}
           rowsStyles={setStylesFasi}
         />
       </div>
@@ -73,6 +76,7 @@ const EditCompany = (props) => {
           headers={props.headerText}
           onClose={showUpdateWindow}
           companyData={props.myCompany}
+          surveyName={props.mySurvey.DesQuestionario}
           windowsType={{
             headerText: "Modifica azienda",
             btnText: "Fatto",

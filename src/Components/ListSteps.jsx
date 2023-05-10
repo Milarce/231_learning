@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import HeaderTable from "./Table/HeaderTable";
 import RowsTable from "./Table/RowsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import EditStep from "./EditStep";
+import UpdateContext from "../Store/update-context";
 
 let selectedStepId;
 
 const ListSteps = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
+
+  const ctx = useContext(UpdateContext);
 
   const openModifyWindow = (e) => {
     selectedStepId = e.target.closest(".btn").id;
@@ -22,10 +25,10 @@ const ListSteps = (props) => {
   return (
     <React.Fragment>
       <HeaderTable rows={props.headerText} sendStyles={props.headerStyles} />
-      {props.stepsArr.map((stepObj, i) => {
+      {ctx.stepsArr.map((stepObj, i) => {
         const rowsText = [
-          stepObj.id,
-          stepObj.descrizione,
+          stepObj.NumFase,
+          stepObj.DesFase,
           <button className="btn" id={i} onClick={openModifyWindow}>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>,

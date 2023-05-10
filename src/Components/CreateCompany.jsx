@@ -42,7 +42,7 @@ const CreateCompany = (props) => {
       alert("Tutti campi sono obbligatori");
     } else {
       const companyObj = {
-        idAzienda: props.companyData.idAzienda,
+        IdAzienda: props.companyData.IdAzienda,
         desAzienda: companyNameRef.current.value,
         DesQuestionario: questionsNameRef.current.value,
         Documentation: docFile.name,
@@ -72,7 +72,7 @@ const CreateCompany = (props) => {
             </div>
             <div className={styles["el--2"]}>
               <ItemRowsTable size={"normal"}>
-                <span>{props.companyData.idAzienda}</span>
+                <span>{props.companyData.IdAzienda}</span>
               </ItemRowsTable>
             </div>
             <div className={styles["el--3"]}>
@@ -86,7 +86,7 @@ const CreateCompany = (props) => {
                   type="text"
                   maxLength={50}
                   placeholder="Azienda - Formazione 231 (anno)"
-                  defaultValue={props.companyData.desAzienda}
+                  defaultValue={props.companyData.DesAzienda}
                   ref={companyNameRef}
                 />
               </ItemRowsTable>
@@ -143,7 +143,7 @@ const CreateCompany = (props) => {
                   name="questionsName"
                   type="text"
                   maxLength={150}
-                  defaultValue={props.companyData.DesQuestionario}
+                  defaultValue={props.surveyName}
                   ref={questionsNameRef}
                 />
               </ItemRowsTable>
