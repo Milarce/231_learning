@@ -63,7 +63,7 @@ const EditStep = (props) => {
                   className={styles["el--rows"]}
                   name="forward"
                   type="text"
-                  defaultValue={props.stepName.descrizione}
+                  defaultValue={props.stepName.DesFase}
                   ref={descrizione}
                 />
               </ItemRowsTable>
@@ -77,7 +77,7 @@ const EditStep = (props) => {
                   className={styles["el--rows"]}
                   name="forward"
                   type="number"
-                  defaultValue={props.stepName.noSolleciti}
+                  defaultValue={props.stepName.NumSolleciti}
                   ref={mailNumber}
                 />
               </ItemRowsTable>
@@ -91,7 +91,7 @@ const EditStep = (props) => {
                   className={styles["el--rows"]}
                   name="days"
                   type="number"
-                  defaultValue={props.stepName.giorniSollecito}
+                  defaultValue={props.stepName.NumGiorniSollecito}
                   ref={daysNumber}
                 />
               </ItemRowsTable>
@@ -104,7 +104,7 @@ const EditStep = (props) => {
                 <textarea
                   className={styles["el--rows"]}
                   name="body-mail"
-                  defaultValue={props.stepName.bodyMail}
+                  defaultValue={props.stepName.DesBodyEmail}
                   ref={bodyMail}
                 ></textarea>
               </ItemRowsTable>
@@ -118,7 +118,7 @@ const EditStep = (props) => {
                 <textarea
                   className={styles["el--rows"]}
                   name="body-pagina"
-                  defaultValue={props.stepName.bodyPage}
+                  defaultValue={props.stepName.DesBodyPagina}
                   ref={bodyPage}
                 ></textarea>
               </ItemRowsTable>

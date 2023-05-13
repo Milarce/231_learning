@@ -3,7 +3,7 @@ import React from "react";
 const UpdateContext = React.createContext({
   updateSteps: () => {},
   handleCompany: () => {},
-  stepsArr: [{}],
+  //stepsArr: [{}],
 });
 
 export default UpdateContext;

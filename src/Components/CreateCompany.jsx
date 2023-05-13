@@ -3,7 +3,8 @@ import styles from "./CreateCompany.module.css";
 import ItemHeaderTable from "./Table/ItemHeaderTable";
 import ItemRowsTable from "./Table/ItemRowsTable";
 import FormModal from "./Modals/FormModal";
-import UpdateContext from "../Store/update-context";
+//import UpdateContext from "../Store/update-context";
+import axios from "axios";
 //import MessageModal from "./Modals/MessageModal";
 
 const CreateCompany = (props) => {
@@ -12,7 +13,23 @@ const CreateCompany = (props) => {
   const companyNameRef = useRef();
   const questionsNameRef = useRef();
 
-  const ctx = useContext(UpdateContext);
+  //const ctx = useContext(UpdateContext);
+  const setCompanyData = async (dataCmpny, dataQuestion) => {
+    try {
+      const setCompanies = axios.put(
+        "http://localhost:3001/aziende",
+        dataCmpny
+      );
+      const setQuestionari = axios.put(
+        "http://localhost:3001/questionari",
+        dataQuestion
+      );
+      await Promise.all([setCompanies, setQuestionari]);
+      console.log("SUCCESS");
+    } catch (err) {
+      console.error(new Error(err));
+    }
+  };
 
   const validation = () => {
     return (
@@ -43,15 +60,29 @@ const CreateCompany = (props) => {
     } else {
       const companyObj = {
         IdAzienda: props.companyData.IdAzienda,
-        desAzienda: companyNameRef.current.value,
-        DesQuestionario: questionsNameRef.current.value,
-        Documentation: docFile.name,
-        Images: imgFile.name,
-        MailMittente: "<learning@231workstation.com>",
-        fasi: props.companyData.fasi,
+        DesAzienda: companyNameRef.current.value,
+        PathDoc: companyNameRef.current.value,
+        FlgUpdate: 1,
+        PcCopiaLocale: "",
+        IdGruppoAzienda: 0,
       };
+      const questionarioObj = {
+        IdAzienda: props.companyData.IdAzienda,
+        IdQuestionario: 1,
+        DesQuestionario: questionsNameRef.current.value,
+      };
+      setCompanyData(companyObj, questionarioObj);
+      /*   {
+        IdAzienda: props.companyData.IdAzienda,
+        desAzienda: companyNameRef.current.value,
+        //DesQuestionario: questionsNameRef.current.value,
+        //Documentation: docFile.name,
+        //Images: imgFile.name,
+        //fasi: props.companyData.fasi,
+      }; */
+
       props.onClose();
-      return ctx.handleCompany(companyObj);
+      //return ctx.handleCompany(companyObj);
     }
   };
 

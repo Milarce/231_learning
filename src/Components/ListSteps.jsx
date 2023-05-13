@@ -4,14 +4,14 @@ import RowsTable from "./Table/RowsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import EditStep from "./EditStep";
-import UpdateContext from "../Store/update-context";
+//import UpdateContext from "../Store/update-context";
 
 let selectedStepId;
 
 const ListSteps = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
 
-  const ctx = useContext(UpdateContext);
+  //const ctx = useContext(UpdateContext);
 
   const openModifyWindow = (e) => {
     selectedStepId = e.target.closest(".btn").id;
@@ -25,7 +25,7 @@ const ListSteps = (props) => {
   return (
     <React.Fragment>
       <HeaderTable rows={props.headerText} sendStyles={props.headerStyles} />
-      {ctx.stepsArr.map((stepObj, i) => {
+      {props.companyFasi.map((stepObj, i) => {
         const rowsText = [
           stepObj.NumFase,
           stepObj.DesFase,
@@ -40,7 +40,7 @@ const ListSteps = (props) => {
 
       {IsVisible && (
         <EditStep
-          stepName={props.stepsArr[selectedStepId]}
+          stepName={props.companyFasi[selectedStepId]}
           onClose={handlerVisibility}
         />
       )}

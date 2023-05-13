@@ -44,7 +44,6 @@ const Content = () => {
       const getQuestionari = axios.get("http://localhost:3001/questionari");
 
       const dataResp = await Promise.all([getCompanies, getQuestionari]);
-      console.log(dataResp);
       setCompanyData(dataResp[0].data);
       setDesQuestionariArr(dataResp[1].data);
     } catch (err) {

@@ -24,7 +24,7 @@ const MenuBar = (props) => {
                 className="main-item"
                 data-view-all="/it-it/services-it"
               >
-                <a href="https://www.bdo.it/it-it/services-it">Azienda</a>
+                <a href="https://www.bdo.it/it-it/services-it">Aziende</a>
               </span>
             </li>
             <li>
@@ -34,7 +34,7 @@ const MenuBar = (props) => {
                 data-view-all="/it-it/industries-it"
               >
                 <a href="#" onClick={props.showList}>
-                  List
+                  Dipendenti
                 </a>
               </span>
             </li>

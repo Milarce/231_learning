@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
 import RowsTable from "./Table/RowsTable";
@@ -9,12 +9,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CompanyLogo from "./Miscellany/CompanyLogo";
 import Button from "./Miscellany/Button";
+import axios from "axios";
 
 const EditCompany = (props) => {
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
   const setStylesFasi = ["one-size", "seven-size", "one-size"];
 
   const [IsVisible, setIsVisible] = useState(false);
+  const [StepsArr, setStepsArr] = useState([]);
+
+  useEffect(() => {
+    getStepsData();
+  }, []);
+
+  const getStepsData = async () => {
+    try {
+      const getSteps = await axios.get(
+        "http://localhost:3001/questionari-fasi"
+      );
+      setStepsArr(getSteps.data);
+    } catch (err) {
+      console.error(new Error(err));
+    }
+  };
 
   const showUpdateWindow = () => {
     setIsVisible((prevIsVisible) => !prevIsVisible);
@@ -39,6 +56,10 @@ const EditCompany = (props) => {
     ];
   };
 
+  const extractSteps = (companyObj) => {
+    return StepsArr.filter((step) => step.IdAzienda === companyObj.IdAzienda);
+  };
+
   return (
     <React.Fragment>
       <CompanyLogo
@@ -61,6 +82,7 @@ const EditCompany = (props) => {
           headerText={tableHeaderFasi}
           headerStyles={setStylesFasi}
           rowsStyles={setStylesFasi}
+          companyFasi={extractSteps(props.myCompany)}
         />
       </div>
       <footer className={`${styles.table} ${styles["btn-container"]}`}>
