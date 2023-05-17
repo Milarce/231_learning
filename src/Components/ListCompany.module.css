@@ -1,3 +1,8 @@
+.section {
+  min-height: 100vh;
+  margin: 15rem auto;
+}
+
 .list {
   display: flex;
   align-items: center;
@@ -51,4 +56,16 @@ li {
 
 .fifth {
   flex: 2;
+}
+
+@media (width>= 1140px) {
+  .section {
+    width: 1140px;
+  }
+}
+
+@media (769px <= width < 1140px) {
+  .section {
+    width: 970px;
+  }
 }

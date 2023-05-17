@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "./Button";
 import styles from "./Header.module.css";
 import Social from "./Social";
@@ -34,7 +35,9 @@ const Header = () => {
               <a href="/it-it/careers-it">Careers</a>
             </li>
           </ul>
-          <Button btnType={"button"} text={"A"} btnStyle={"login"} />
+          <Link to="/login">
+            <Button btnType={"button"} text={"A"} btnStyle={"login"} />
+          </Link>
         </nav>
       </div>
     </header>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./MenuBar.module.css";
 import logoBDO from "../../img/logo/rsz_bdo_logosvg.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,10 +11,10 @@ const MenuBar = (props) => {
     <div className={styles["sub-header"]}>
       <div className={styles.container}>
         <div className={styles["logo-container"]}>
-          <a id="logoLink" href="https://www.bdo.it/it-it/home-it">
+          <Link to="/">
             <img src={logoBDO} alt="BDO logo" className={styles.logo} />
             <span className={styles.italia}>Italia</span>
-          </a>
+          </Link>
         </div>
 
         <nav className={styles["menu-nav"]}>
@@ -24,7 +25,7 @@ const MenuBar = (props) => {
                 className="main-item"
                 data-view-all="/it-it/services-it"
               >
-                <a href="https://www.bdo.it/it-it/services-it">Aziende</a>
+                <Link to="/list-company">Aziende</Link>
               </span>
             </li>
             <li>

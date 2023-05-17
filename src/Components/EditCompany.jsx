@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styles from "./EditCompany.module.css";
 import logoCmpny from "../img/logo/logo_granarolo.jpg";
 import RowsTable from "./Table/RowsTable";
@@ -10,24 +11,59 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CompanyLogo from "./Miscellany/CompanyLogo";
 import Button from "./Miscellany/Button";
 import axios from "axios";
+import { PulseLoader } from "react-spinners";
+
+const companyHeaderTexts = [
+  "ID",
+  "Nome Azienda",
+  "Intervento Formativo",
+  "Documentazione",
+  "Creato",
+  "Modifica",
+];
+
+const companyStylesArr = [
+  "one-size",
+  "four-size",
+  "seven-size",
+  "two-size",
+  "two-size",
+  "one-size",
+];
 
 const EditCompany = (props) => {
+  let { idAzienda } = useParams();
+  let navigate = useNavigate();
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
   const setStylesFasi = ["one-size", "seven-size", "one-size"];
 
   const [IsVisible, setIsVisible] = useState(false);
-  const [StepsArr, setStepsArr] = useState([]);
+  const [CompanyData, setCompanyData] = useState([]);
+  const [Load, setLoad] = useState(true); //Shows-Hide the spinner
 
   useEffect(() => {
-    getStepsData();
+    getCompanyData();
   }, []);
 
-  const getStepsData = async () => {
+  const getCompanyData = async () => {
     try {
-      const getSteps = await axios.get(
-        "http://localhost:3001/questionari-fasi"
+      const getCompany = axios.get(
+        `http://localhost:3001/aziende/${idAzienda}`
       );
-      setStepsArr(getSteps.data);
+      const getQuestionario = axios.get(
+        `http://localhost:3001/questionari/${idAzienda}`
+      );
+      const getSteps = axios.get(
+        `http://localhost:3001/questionari-fasi/${idAzienda}`
+      );
+
+      const dataResp = await Promise.all([
+        getCompany,
+        getQuestionario,
+        getSteps,
+      ]);
+      setCompanyData(dataResp);
+      setLoad(false);
     } catch (err) {
       console.error(new Error(err));
     }
@@ -37,14 +73,18 @@ const EditCompany = (props) => {
     setIsVisible((prevIsVisible) => !prevIsVisible);
   };
 
+  const goBack = () => {
+    navigate("/list-company");
+  };
+
   const extractValues = (companyObj) => {
-    const date = new Date(companyObj.createdAt); //La fecha leida del DB viene como STRING
+    const date = new Date(companyObj[0].data.createdAt); //La fecha leida del DB viene como STRING
     const formatDate = new Intl.DateTimeFormat(navigator.language).format(date);
     const values = [
-      companyObj.IdAzienda,
-      companyObj.DesAzienda,
-      props.mySurvey.DesQuestionario,
-      companyObj.IdGruppoAzienda,
+      companyObj[0].data.IdAzienda,
+      companyObj[0].data.DesAzienda,
+      companyObj[1].data.DesQuestionario,
+      companyObj[0].data.IdGruppoAzienda,
       formatDate,
     ];
 
@@ -56,56 +96,68 @@ const EditCompany = (props) => {
     ];
   };
 
-  const extractSteps = (companyObj) => {
-    return StepsArr.filter((step) => step.IdAzienda === companyObj.IdAzienda);
-  };
-
   return (
-    <React.Fragment>
-      <CompanyLogo
-        logoPath={logoCmpny}
-        companyName={props.myCompany.desAzienda}
-      />
-      <HeaderTable rows={props.headerText} sendStyles={props.sizeArr} />
+    <section className={styles.section}>
+      {Load ? (
+        <PulseLoader
+          color={"#ed1a3b"}
+          loading={true}
+          size={"3rem"}
+          cssOverride={{ marginTop: "45vh", textAlign: "center" }}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div>
+          <CompanyLogo
+            logoPath={logoCmpny}
+            companyName={CompanyData[0].data.DesAzienda}
+          />
+          <HeaderTable
+            rows={companyHeaderTexts}
+            sendStyles={companyStylesArr}
+          />
 
-      <RowsTable
-        rows={extractValues(props.myCompany)}
-        sendStyles={props.sizeArr}
-      />
+          <RowsTable
+            rows={extractValues(CompanyData)}
+            sendStyles={companyStylesArr}
+          />
 
-      <div className={styles["steps-container"]}>
-        <div className="steps">
-          <p className={styles["step-title"]}>Fasi</p>
+          <div className={styles["steps-container"]}>
+            <div className="steps">
+              <p className={styles["step-title"]}>Fasi</p>
+            </div>
+
+            <ListSteps
+              headerText={tableHeaderFasi}
+              headerStyles={setStylesFasi}
+              rowsStyles={setStylesFasi}
+              companyFasi={CompanyData[2].data}
+            />
+          </div>
+          <footer className={`${styles.table} ${styles["btn-container"]}`}>
+            <Button
+              btnType={"button"}
+              btnAction={goBack}
+              btnText={"Fatto"}
+              btnStyle={"create"}
+            />
+          </footer>
+          {IsVisible && (
+            <CreateCompany
+              headers={companyHeaderTexts}
+              onClose={showUpdateWindow}
+              companyData={CompanyData[0].data}
+              surveyName={CompanyData[1].data}
+              windowsType={{
+                headerText: "Modifica azienda",
+                btnText: "Fatto",
+              }}
+            />
+          )}
         </div>
-
-        <ListSteps
-          headerText={tableHeaderFasi}
-          headerStyles={setStylesFasi}
-          rowsStyles={setStylesFasi}
-          companyFasi={extractSteps(props.myCompany)}
-        />
-      </div>
-      <footer className={`${styles.table} ${styles["btn-container"]}`}>
-        <Button
-          btnType={"button"}
-          btnAction={props.btnAction}
-          btnText={"Fatto"}
-          btnStyle={"create"}
-        />
-      </footer>
-      {IsVisible && (
-        <CreateCompany
-          headers={props.headerText}
-          onClose={showUpdateWindow}
-          companyData={props.myCompany}
-          surveyName={props.mySurvey.DesQuestionario}
-          windowsType={{
-            headerText: "Modifica azienda",
-            btnText: "Fatto",
-          }}
-        />
       )}
-    </React.Fragment>
+    </section>
   );
 };
 

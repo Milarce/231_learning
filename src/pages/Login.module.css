@@ -1,5 +1,4 @@
 .loginContainer {
-  background-color: #fff;
   margin: 30vh auto;
   width: 30rem;
   height: 30rem;
@@ -11,13 +10,9 @@
   flex-direction: column;
   font-size: 2rem;
   gap: 1rem;
-  margin-left: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 label {
   margin-top: 2rem;
-}
-
-input {
-  width: 80%;
 }

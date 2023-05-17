@@ -117,7 +117,7 @@ const CreateCompany = (props) => {
                   type="text"
                   maxLength={50}
                   placeholder="Azienda - Formazione 231 (anno)"
-                  defaultValue={props.companyData.DesAzienda}
+                  defaultValue={props.companyData?.DesAzienda}
                   ref={companyNameRef}
                 />
               </ItemRowsTable>
@@ -174,7 +174,7 @@ const CreateCompany = (props) => {
                   name="questionsName"
                   type="text"
                   maxLength={150}
-                  defaultValue={props.surveyName}
+                  defaultValue={props.surveyName?.DesQuestionario}
                   ref={questionsNameRef}
                 />
               </ItemRowsTable>
