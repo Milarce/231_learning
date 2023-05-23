@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import styles from "./Header.module.css";
 import Social from "./Social";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+//import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 const Header = () => {
   return (
@@ -36,7 +39,9 @@ const Header = () => {
             </li>
           </ul>
           <Link to="/login">
-            <Button btnType={"button"} text={"A"} btnStyle={"login"} />
+            <Button btnType={"button"} btnStyle={"login"}>
+              <FontAwesomeIcon icon={faUser} />
+            </Button>
           </Link>
         </nav>
       </div>

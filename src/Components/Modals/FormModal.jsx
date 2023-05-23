@@ -15,16 +15,18 @@ const FormModal = (props) => {
         >
           <Button
             btnType={"button"}
-            btnText={"Annulla"}
             btnStyle={"back"}
             btnAction={props.onClose}
-          />
+          >
+            Annulla
+          </Button>
           <Button
             btnType={"submit"}
-            btnText={props.btnText}
             btnStyle={"create"}
             btnAction={props.onSubmit}
-          />
+          >
+            {props.btnText}
+          </Button>
         </footer>
       </div>
     </React.Fragment>

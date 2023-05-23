@@ -14,7 +14,7 @@ import "./App.css";
 import MenuBar from "./Components/Miscellany/MenuBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import ListCompany, { listCompanyLoader } from "./Components/ListCompany";
+import ListCompany from "./Components/ListCompany";
 import ErrorPage from "./pages/ErrorPage";
 import EditCompany from "./Components/EditCompany";
 
@@ -27,7 +27,7 @@ function App() {
         <Route
           path="/list-company"
           element={<ListCompany />}
-          loader={listCompanyLoader}
+          //loader={listCompanyLoader}
         />
         <Route path="/list-company/:idAzienda" element={<EditCompany />} />
         <Route path="*" element={<ErrorPage />} />

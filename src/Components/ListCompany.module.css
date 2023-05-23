@@ -58,6 +58,12 @@ li {
   flex: 2;
 }
 
+.error {
+  margin-top: 15rem;
+  text-align: center;
+  font-size: 5rem;
+}
+
 @media (width>= 1140px) {
   .section {
     width: 1140px;

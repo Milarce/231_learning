@@ -1,6 +1,6 @@
 .loginContainer {
   margin: 30vh auto;
-  width: 30rem;
+  width: 50rem;
   height: 30rem;
   color: inherit;
 }
@@ -13,6 +13,25 @@
   margin-bottom: 2rem;
 }
 
-label {
+.login-form input {
+  background: white;
+  height: 4rem;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+  text-indent: 5px;
+}
+
+.login-form input:focus {
+  outline: none;
+}
+
+.login-form input::placeholder {
+  opacity: 0.5;
+  color: #333;
+  text-indent: 5px;
+}
+
+.login-form label {
   margin-top: 2rem;
 }

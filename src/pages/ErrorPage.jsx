@@ -5,7 +5,7 @@ import errorImg from "../img/error-001.png";
 const ErrorPage = () => {
   return (
     <div className={styles.container}>
-      <img src={errorImg} alt="" />
+      <img className={styles.errorImg} src={errorImg} alt="" />
       <p>Upssss! Something went wrong</p>
     </div>
   );

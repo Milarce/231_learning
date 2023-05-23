@@ -12,6 +12,7 @@ import CompanyLogo from "./Miscellany/CompanyLogo";
 import Button from "./Miscellany/Button";
 import axios from "axios";
 import { PulseLoader } from "react-spinners";
+import { validateUser } from "../validation/ValidateUser";
 
 const companyHeaderTexts = [
   "ID",
@@ -42,7 +43,9 @@ const EditCompany = (props) => {
   const [Load, setLoad] = useState(true); //Shows-Hide the spinner
 
   useEffect(() => {
-    getCompanyData();
+    validateUser().then((resp) => {
+      resp ? getCompanyData() : navigate("/login");
+    });
   }, []);
 
   const getCompanyData = async () => {
@@ -136,12 +139,9 @@ const EditCompany = (props) => {
             />
           </div>
           <footer className={`${styles.table} ${styles["btn-container"]}`}>
-            <Button
-              btnType={"button"}
-              btnAction={goBack}
-              btnText={"Fatto"}
-              btnStyle={"create"}
-            />
+            <Button btnType={"button"} btnAction={goBack} btnStyle={"create"}>
+              Fatto
+            </Button>
           </footer>
           {IsVisible && (
             <CreateCompany

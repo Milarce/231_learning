@@ -11,6 +11,7 @@ import CreateCompany from "./CreateCompany";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { PulseLoader } from "react-spinners";
+import { validateUser } from "../validation/ValidateUser";
 
 const companyHeaderTexts = [
   "ID",
@@ -32,22 +33,37 @@ const companyStylesArr = [
 
 const ListCompany = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
-  //const [Loading, setLoading] = useState(false);
-  const companyData = useLoaderData();
-  const navigation = useNavigation();
+  const [companyData, setCompanyData] = useState([]);
+  const [Loading, setLoading] = useState(true);
+  //const companyData = useLoaderData();
+  //const navigation = useNavigation();
   const navigate = useNavigate();
 
-  /* useEffect(() => {
-    console.log("UseEffect");
-    setLoading(true);
-    const counter = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(counter);
-    }, 3000);
-  }, []); */
+  useEffect(() => {
+    validateUser().then((resp) => {
+      resp ? getData() : navigate("/login");
+    });
+  }, []);
 
   const showCreateWindow = () => {
     setIsVisible((prevIsVisible) => !prevIsVisible);
+  };
+
+  const getData = async () => {
+    try {
+      const getCompanies = await axios.get("http://localhost:3001/aziende", {
+        headers: {
+          "my-access-token": localStorage.getItem("token"),
+        },
+      });
+      ////const dataResp = await Promise.all([getCompanies, getQuestionari]);
+      //setCompanyData(dataResp);
+
+      setCompanyData(getCompanies.data);
+      setLoading(false);
+    } catch (err) {
+      console.error(new Error(err));
+    }
   };
 
   const modifySelectedCompany = (e) => {
@@ -60,8 +76,10 @@ const ListCompany = (props) => {
   };
 
   const extractCompanyDetails = (companiesArr) => {
-    const [cmpnyList, questionList] = companiesArr;
-    const detailsArr = cmpnyList.data.map((cmpy, i) => {
+    //const [cmpnyList, questionList] = companiesArr;
+
+    //const detailsArr = cmpnyList.data.map((cmpy, i) => {
+    const detailsArr = companiesArr.map((cmpy, i) => {
       const date = new Date(cmpy.createdAt); //La fecha leida del DB viene como STRING
 
       const formatDate = new Intl.DateTimeFormat(navigator.language).format(
@@ -70,7 +88,7 @@ const ListCompany = (props) => {
       const values = [
         cmpy.IdAzienda,
         cmpy.DesAzienda,
-        questionList.data[i].DesQuestionario,
+        cmpy.DesQuestionario,
         cmpy.IdGruppoAzienda,
         formatDate,
       ];
@@ -86,75 +104,69 @@ const ListCompany = (props) => {
 
   return (
     <section className={styles.section}>
-      {
-        //Loading
-        navigation.state === "loading" ? (
-          <PulseLoader
-            color={"#ed1a3b"}
-            loading={true}
-            size={"3rem"}
-            cssOverride={{ marginTop: "45vh", textAlign: "center" }}
-            aria-label="Loading Spinner"
-            data-testid="loader"
+      {Loading ? (
+        <PulseLoader
+          color={"#ed1a3b"}
+          loading={true}
+          size={"3rem"}
+          cssOverride={{ marginTop: "45vh", textAlign: "center" }}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div>
+          <CompanyLogo logoPath={logoLearning} companyName={"Le tue aziende"} />
+          <HeaderTable
+            rows={companyHeaderTexts}
+            sendStyles={companyStylesArr}
           />
-        ) : (
-          <div>
-            <CompanyLogo
-              logoPath={logoLearning}
-              companyName={"Le tue aziende"}
+          {extractCompanyDetails(companyData).map((company, i) => {
+            return (
+              <RowsTable key={i} rows={company} sendStyles={companyStylesArr} />
+            );
+          })}
+          <footer className={`${styles.table} ${styles["btn-container"]}`}>
+            <Button
+              btnType={"submit"}
+              btnStyle={"create"}
+              btnAction={showCreateWindow}
+            >
+              Crea Azienda
+            </Button>
+          </footer>
+          {IsVisible && (
+            <CreateCompany
+              headers={companyHeaderTexts}
+              onClose={showCreateWindow}
+              companyData={{
+                IdAzienda: companyData[0].data.at(-1).IdAzienda + 10, //Takes last id and adds 10 to set the new id
+                //fasi: props.companies.at(-1).fasi, //Takes the last company steps to the new company
+              }}
+              windowsType={{
+                headerText: "Crea nuova azienda",
+                btnText: "Crea",
+              }}
             />
-            <HeaderTable
-              rows={companyHeaderTexts}
-              sendStyles={companyStylesArr}
-            />
-            {extractCompanyDetails(companyData).map((company, i) => {
-              return (
-                <RowsTable
-                  key={i}
-                  rows={company}
-                  sendStyles={companyStylesArr}
-                />
-              );
-            })}
-            <footer className={`${styles.table} ${styles["btn-container"]}`}>
-              <Button
-                btnType={"submit"}
-                btnText={"Crea Azienda"}
-                btnStyle={"create"}
-                btnAction={showCreateWindow}
-              />
-            </footer>
-            {IsVisible && (
-              <CreateCompany
-                headers={companyHeaderTexts}
-                onClose={showCreateWindow}
-                companyData={{
-                  IdAzienda: companyData[0].data.at(-1).IdAzienda + 10, //Takes last id and adds 10 to set the new id
-                  //fasi: props.companies.at(-1).fasi, //Takes the last company steps to the new company
-                }}
-                windowsType={{
-                  headerText: "Crea nuova azienda",
-                  btnText: "Crea",
-                }}
-              />
-            )}
-          </div>
-        )
-      }
+          )}
+        </div>
+      )}
     </section>
   );
 };
 
 export default ListCompany;
 
-export const listCompanyLoader = async () => {
+/* export const listCompanyLoader = async () => {
   try {
+    //validateUser();
     const getCompanies = axios.get("http://localhost:3001/aziende");
     const getQuestionari = axios.get("http://localhost:3001/questionari");
 
     const dataResp = await Promise.all([getCompanies, getQuestionari]);
+
     return dataResp;
   } catch (err) {
     console.error(new Error(err));
   }
 };
+ */

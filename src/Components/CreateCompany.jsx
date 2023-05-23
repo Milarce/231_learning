@@ -16,11 +16,11 @@ const CreateCompany = (props) => {
   //const ctx = useContext(UpdateContext);
   const setCompanyData = async (dataCmpny, dataQuestion) => {
     try {
-      const setCompanies = axios.put(
+      const setCompanies = axios.post(
         "http://localhost:3001/aziende",
         dataCmpny
       );
-      const setQuestionari = axios.put(
+      const setQuestionari = axios.post(
         "http://localhost:3001/questionari",
         dataQuestion
       );

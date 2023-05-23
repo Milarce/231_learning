@@ -8,7 +8,7 @@ const Button = (props) => {
       type={props.btnType}
       onClick={props.btnAction}
     >
-      {props.btnText}
+      {props.children}
     </button>
   );
 };

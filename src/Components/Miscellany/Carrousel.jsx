@@ -5,7 +5,7 @@ import image from "../../img/carrousel/001-1.jpg";
 const Carrousel = () => {
   return (
     <div className={styles.container}>
-      <img src={image} alt="BDO" />
+      <img className={styles.carrousel} src={image} alt="BDO" />
     </div>
   );
 };
