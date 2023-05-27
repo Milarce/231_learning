@@ -42,7 +42,6 @@ const Login = () => {
         credObj
       );
       if (resp.data.error) return alert(resp.data.error);
-      console.log(resp.data);
       localStorage.setItem("token", resp.data.token);
       navigate("/list-company");
     } catch (err) {

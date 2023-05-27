@@ -4,9 +4,10 @@ import ItemHeaderTable from "./Table/ItemHeaderTable";
 import FormModal from "./Modals/FormModal";
 import ItemRowsTable from "./Table/ItemRowsTable";
 import UpdateContext from "../Store/update-context";
+import axios from "axios";
 
 const EditStep = (props) => {
-  const ctx = useContext(UpdateContext);
+  //const ctx = useContext(UpdateContext);
 
   const mailNumber = useRef();
   const daysNumber = useRef();
@@ -24,21 +25,35 @@ const EditStep = (props) => {
     );
   };
 
+  const editStep = async (stepObj) => {
+    try {
+      axios.post("http://localhost:3001/questionari-fasi/update", stepObj);
+
+      console.log("FASE SUCCESSFULLY MODIFIED");
+      props.updateView(stepObj);
+    } catch (err) {
+      console.error(new Error(err));
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!validation()) {
       alert("Tutti campi sono obbligatori");
     } else {
       const stepObj = {
-        id: props.stepName.id,
-        descrizione: descrizione.current.value,
-        noSolleciti: mailNumber.current.value,
-        giorniSollecito: daysNumber.current.value,
-        bodyMail: bodyMail.current.value,
-        bodyPage: bodyPage.current.value,
+        IdAzienda: props.stepName.IdAzienda,
+        IdQuestionario: props.stepName.IdQuestionario,
+        NumFase: props.stepName.NumFase,
+        DesFase: descrizione.current.value,
+        NumGiorniSollecito: daysNumber.current.value,
+        NumSolleciti: mailNumber.current.value,
+        DesBodyEmail: bodyMail.current.value,
+        DesBodyPagina: bodyPage.current.value,
+        TipoFase: props.stepName.TipoFase,
       };
-      props.onClose();
-      return ctx.updateSteps(stepObj);
+      editStep(stepObj);
+      //props.onClose();
     }
   };
 

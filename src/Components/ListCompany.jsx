@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLoaderData, useNavigation, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./ListCompany.module.css";
 import HeaderTable from "./Table/HeaderTable";
@@ -35,19 +35,14 @@ const ListCompany = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
   const [companyData, setCompanyData] = useState([]);
   const [Loading, setLoading] = useState(true);
-  //const companyData = useLoaderData();
-  //const navigation = useNavigation();
   const navigate = useNavigate();
+  //const companyData = useLoaderData();
 
   useEffect(() => {
     validateUser().then((resp) => {
-      resp ? getData() : navigate("/login");
+      resp.loggedIn ? getData() : navigate("/login");
     });
-  }, []);
-
-  const showCreateWindow = () => {
-    setIsVisible((prevIsVisible) => !prevIsVisible);
-  };
+  }, [IsVisible]); //Ejecuta useEffect cada vez que cambia "IsVisible"
 
   const getData = async () => {
     try {
@@ -58,7 +53,6 @@ const ListCompany = (props) => {
       });
       ////const dataResp = await Promise.all([getCompanies, getQuestionari]);
       //setCompanyData(dataResp);
-
       setCompanyData(getCompanies.data);
       setLoading(false);
     } catch (err) {
@@ -66,19 +60,17 @@ const ListCompany = (props) => {
     }
   };
 
+  const showCreateWindow = () => {
+    setIsVisible((prevIsVisible) => !prevIsVisible);
+  };
+
   const modifySelectedCompany = (e) => {
     const selCompanyId = e.target.closest(".btn").id;
-    const cmpnyId = companyData[0].data[selCompanyId].IdAzienda;
+    const cmpnyId = companyData[selCompanyId].IdAzienda;
     navigate(`/list-company/${cmpnyId}`);
-    /*  const selCompany = props.companies[selCompanyId];
-    const selQuestionario = props.DesQuestionariArr[selCompanyId];
-    props.onSelected(selCompany, selQuestionario); */
   };
 
   const extractCompanyDetails = (companiesArr) => {
-    //const [cmpnyList, questionList] = companiesArr;
-
-    //const detailsArr = cmpnyList.data.map((cmpy, i) => {
     const detailsArr = companiesArr.map((cmpy, i) => {
       const date = new Date(cmpy.createdAt); //La fecha leida del DB viene como STRING
 
@@ -138,10 +130,6 @@ const ListCompany = (props) => {
             <CreateCompany
               headers={companyHeaderTexts}
               onClose={showCreateWindow}
-              companyData={{
-                IdAzienda: companyData[0].data.at(-1).IdAzienda + 10, //Takes last id and adds 10 to set the new id
-                //fasi: props.companies.at(-1).fasi, //Takes the last company steps to the new company
-              }}
               windowsType={{
                 headerText: "Crea nuova azienda",
                 btnText: "Crea",

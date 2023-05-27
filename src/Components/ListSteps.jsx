@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import HeaderTable from "./Table/HeaderTable";
 import RowsTable from "./Table/RowsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,12 +10,24 @@ let selectedStepId;
 
 const ListSteps = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
+  const [steps, setSteps] = useState(props.companyFasi);
 
-  //const ctx = useContext(UpdateContext);
+  /*   useEffect(() => {
+    console.log("component render");
+    //console.log(steps[0].DesFase);
+  }, [IsVisible]); */
 
   const openModifyWindow = (e) => {
     selectedStepId = e.target.closest(".btn").id;
     handlerVisibility();
+  };
+
+  const updateView = (modifiedObj) => {
+    setSteps((prevState) => {
+      prevState[modifiedObj.NumFase] = { ...modifiedObj };
+      handlerVisibility();
+      return prevState;
+    });
   };
 
   const handlerVisibility = () => {
@@ -25,7 +37,7 @@ const ListSteps = (props) => {
   return (
     <React.Fragment>
       <HeaderTable rows={props.headerText} sendStyles={props.headerStyles} />
-      {props.companyFasi.map((stepObj, i) => {
+      {steps.map((stepObj, i) => {
         const rowsText = [
           stepObj.NumFase,
           stepObj.DesFase,
@@ -40,7 +52,8 @@ const ListSteps = (props) => {
 
       {IsVisible && (
         <EditStep
-          stepName={props.companyFasi[selectedStepId]}
+          stepName={steps[selectedStepId]}
+          updateView={updateView}
           onClose={handlerVisibility}
         />
       )}

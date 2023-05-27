@@ -44,9 +44,9 @@ const EditCompany = (props) => {
 
   useEffect(() => {
     validateUser().then((resp) => {
-      resp ? getCompanyData() : navigate("/login");
+      resp.loggedIn ? getCompanyData() : navigate("/login");
     });
-  }, []);
+  }, [IsVisible]);
 
   const getCompanyData = async () => {
     try {
