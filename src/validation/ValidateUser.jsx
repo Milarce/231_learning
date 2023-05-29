@@ -6,6 +6,6 @@ export const validateUser = async () => {
       "my-access-token": localStorage.getItem("token"),
     },
   });
-  //console.log(response.data);
+  console.log(response.data);
   return response.data;
 };

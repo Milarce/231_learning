@@ -1,9 +1,3 @@
-import React from "react";
+import React, { createContext } from "react";
 
-const UpdateContext = React.createContext({
-  updateSteps: () => {},
-  handleCompany: () => {},
-  //stepsArr: [{}],
-});
-
-export default UpdateContext;
+export const AuthContext = createContext({});

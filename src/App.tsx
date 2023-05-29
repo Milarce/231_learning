@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,7 +10,7 @@ import {
 import Header from "./Components/Miscellany/Header";
 import Footer from "./Components/Miscellany/Footer";
 import "./App.css";
-//import Content from "./Components/Content";
+import { AuthContext } from "./Store/update-context";
 import MenuBar from "./Components/Miscellany/MenuBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -48,14 +48,19 @@ function App() {
 export default App;
 
 const Root = () => {
+  const [authObj, setAuthObj] = useState({
+    loggedIn: false,
+    user: {},
+    fullName: {},
+  });
   return (
     <>
-      <Header />
-      <MenuBar />
-      <Outlet />
-      <Footer />
-      {/*  <Link to="/">Home</Link>
-        <Link to="/login">Login</Link> */}
+      <AuthContext.Provider value={{ authObj, setAuthObj }}>
+        <Header />
+        <MenuBar />
+        <Outlet />
+        <Footer />
+      </AuthContext.Provider>
     </>
   );
 };

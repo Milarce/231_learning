@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Store/update-context";
 import styles from "./Login.module.css";
 import FormModal from "../Components/Modals/FormModal";
 import axios from "axios";
@@ -7,6 +8,7 @@ import axios from "axios";
 const Login = () => {
   axios.defaults.withCredentials = true; //Permite enviar cookies requests a Express en el backend
   const navigate = useNavigate();
+  const ctx = useContext(AuthContext);
 
   const [LoginStatus, setLoginStatus] = useState(false);
   const userNameRef = useRef();
@@ -43,6 +45,14 @@ const Login = () => {
       );
       if (resp.data.error) return alert(resp.data.error);
       localStorage.setItem("token", resp.data.token);
+      ctx.setAuthObj((authObj) => {
+        return {
+          ...authObj,
+          loggedIn: resp.data.auth,
+          user: resp.data.user,
+          fullName: resp.data.fullName,
+        };
+      });
       navigate("/list-company");
     } catch (err) {
       console.error(new Error(err));

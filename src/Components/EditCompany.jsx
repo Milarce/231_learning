@@ -32,7 +32,7 @@ const companyStylesArr = [
   "one-size",
 ];
 
-const EditCompany = (props) => {
+const EditCompany = () => {
   let { idAzienda } = useParams();
   let navigate = useNavigate();
   const tableHeaderFasi = ["Id", "Descrizione", "Modifica"];
@@ -43,6 +43,7 @@ const EditCompany = (props) => {
   const [Load, setLoad] = useState(true); //Shows-Hide the spinner
 
   useEffect(() => {
+    console.log("renders");
     validateUser().then((resp) => {
       resp.loggedIn ? getCompanyData() : navigate("/login");
     });
