@@ -19,6 +19,7 @@ const CreateCompany = (props) => {
   const questionsNameRef = useRef();
 
   const navigate = useNavigate();
+  const formData = new FormData();
 
   useEffect(() => {
     //Se decide si la ventana fue abierta desde "Crea Azienda" o desde "Edita Azienda"
@@ -37,7 +38,7 @@ const CreateCompany = (props) => {
   };
 
   //const ctx = useContext(UpdateContext);
-  const setNewCompany = async (dataCmpny, dataQuestion, dataUser) => {
+  const setNewCompany = async (dataCmpny, dataQuestion, dataUser, dataFile) => {
     try {
       const setCompanies = axios.post(
         "http://localhost:3001/aziende",
@@ -56,8 +57,13 @@ const CreateCompany = (props) => {
           },
         }
       );
+      const setData = axios.post("http://localhost:3001/files", dataFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
 
-      await Promise.all([setCompanies, setQuestionari, setUser]);
+      await Promise.all([setCompanies, setQuestionari, setUser, setData]);
       console.log("COMPANY SUCCESSFULLY CREATED");
     } catch (err) {
       console.error(new Error(err));
@@ -94,6 +100,7 @@ const CreateCompany = (props) => {
 
   const handleFileChange = (e) => {
     if (e.target.files) {
+      console.log(e.target.files[0]);
       setDocFile(e.target.files[0]);
     }
   };
@@ -131,9 +138,14 @@ const CreateCompany = (props) => {
             FlgQuery: 1,
             FlgUpdate: 1,
           };
+
+          formData.append("doc", docFile);
+          formData.append("tag", "prova");
+          formData.append("type", 1);
+
           props.companyData
             ? editCompany(companyObj, questionarioObj)
-            : setNewCompany(companyObj, questionarioObj, userObj);
+            : setNewCompany(companyObj, questionarioObj, userObj, formData);
 
           props.onClose();
         }
