@@ -77,11 +77,23 @@ const ListCompany = (props) => {
       const formatDate = new Intl.DateTimeFormat(navigator.language).format(
         date
       );
+      const uint8Array = new Uint8Array(cmpy.fileData.BlobData.data);
+      const file = new Blob([uint8Array], {
+        type: cmpy.fileData.BlobContentType,
+      });
+
+      const url = URL.createObjectURL(file);
+      const downloadLink = (
+        <a href={url} download={cmpy.fileData.BlobName}>
+          {cmpy.fileData.BlobTags}
+        </a>
+      );
+
       const values = [
         cmpy.IdAzienda,
         cmpy.DesAzienda,
         cmpy.DesQuestionario,
-        cmpy.IdGruppoAzienda,
+        downloadLink,
         formatDate,
       ];
       return [

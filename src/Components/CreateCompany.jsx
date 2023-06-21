@@ -19,7 +19,6 @@ const CreateCompany = (props) => {
   const questionsNameRef = useRef();
 
   const navigate = useNavigate();
-  const formData = new FormData();
 
   useEffect(() => {
     //Se decide si la ventana fue abierta desde "Crea Azienda" o desde "Edita Azienda"
@@ -38,9 +37,10 @@ const CreateCompany = (props) => {
   };
 
   //const ctx = useContext(UpdateContext);
-  const setNewCompany = async (dataCmpny, dataQuestion, dataUser, dataFile) => {
+  //const setNewCompany = async (dataCmpny, dataQuestion, dataUser, dataFile) => {
+  const setNewCompany = async (data) => {
     try {
-      const setCompanies = axios.post(
+      /* const setCompanies = axios.post(
         "http://localhost:3001/aziende",
         dataCmpny
       );
@@ -63,7 +63,15 @@ const CreateCompany = (props) => {
         },
       });
 
-      await Promise.all([setCompanies, setQuestionari, setUser, setData]);
+      await Promise.all([setCompanies, setQuestionari, setUser, setData]); */
+
+      await axios.post("http://localhost:3001/aziende", data, {
+        headers: {
+          "content-type": "multipart/form-data",
+          "my-access-token": localStorage.getItem("token"),
+        },
+      });
+
       console.log("COMPANY SUCCESSFULLY CREATED");
     } catch (err) {
       console.error(new Error(err));
@@ -120,7 +128,7 @@ const CreateCompany = (props) => {
         if (!validation()) {
           alert("Tutti campi sono obbligatori");
         } else {
-          const companyObj = {
+          /* const companyObj = {
             IdAzienda: props.companyData?.IdAzienda || lastCompany,
             DesAzienda: companyNameRef.current.value,
             PathDoc: companyNameRef.current.value,
@@ -137,15 +145,23 @@ const CreateCompany = (props) => {
             IdAzienda: props.companyData?.IdAzienda || lastCompany,
             FlgQuery: 1,
             FlgUpdate: 1,
-          };
+          }; */
 
-          formData.append("doc", docFile);
-          formData.append("tag", "prova");
-          formData.append("type", 1);
+          const formData = new FormData();
+          formData.append(
+            "IdAzienda",
+            props.companyData?.IdAzienda || lastCompany
+          );
+          formData.append("DesAzienda", companyNameRef.current.value);
+          formData.append("DesQuestionario", questionsNameRef.current.value);
+          formData.append("uploads", docFile);
+          formData.append("uploads", imgFile);
 
-          props.companyData
+          /* props.companyData
             ? editCompany(companyObj, questionarioObj)
-            : setNewCompany(companyObj, questionarioObj, userObj, formData);
+            : setNewCompany(companyObj, questionarioObj, userObj, formData); */
+
+          props.companyData ? editCompany(formData) : setNewCompany(formData);
 
           props.onClose();
         }
@@ -216,6 +232,7 @@ const CreateCompany = (props) => {
                       id="upload-img"
                       type="file"
                       onChange={handleImgChange}
+                      accept="image/*"
                     />
                     <label
                       className={`${styles.list} ${styles.item} ${

@@ -1,0 +1,28 @@
+.table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1px;
+  border: 1px solid #ccc;
+}
+
+.table-header {
+  color: white;
+  background: #ed1a3b;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.table-body {
+  background-color: #fff;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1px;
+}
+
+.table-cell {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
