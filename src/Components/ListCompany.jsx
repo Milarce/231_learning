@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { PulseLoader } from "react-spinners";
 import { validateUser } from "../validation/ValidateUser";
+import ListingTable from "../Components/Table/ListingTable";
 
 const companyHeaderTexts = [
   "ID",
@@ -29,6 +30,16 @@ const companyStylesArr = [
   "two-size",
   "two-size",
   "one-size",
+];
+
+const columns = [
+  { Header: "No.", accessor: "Number" },
+  { Header: "Id", accessor: "IdAzienda" },
+  { Header: "Nome Azienda", accessor: "DesAzienda" },
+  { Header: "Intervento Formativo", accessor: "DesQuestionario" },
+  { Header: "Documentazione", accessor: "DownloadLink" },
+  { Header: "Creato", accessor: "FormatedDate" },
+  { Header: "Modifica", accessor: "Btn" },
 ];
 
 const ListCompany = (props) => {
@@ -51,9 +62,8 @@ const ListCompany = (props) => {
           "my-access-token": localStorage.getItem("token"),
         },
       });
-      ////const dataResp = await Promise.all([getCompanies, getQuestionari]);
-      //setCompanyData(dataResp);
-      setCompanyData(getCompanies.data);
+      const data = formatCompany(getCompanies.data);
+      setCompanyData(data);
       setLoading(false);
     } catch (err) {
       console.error(new Error(err));
@@ -68,6 +78,41 @@ const ListCompany = (props) => {
     const selCompanyId = e.target.closest(".btn").id;
     const cmpnyId = companyData[selCompanyId].IdAzienda;
     navigate(`/list-company/${cmpnyId}`);
+  };
+
+  const formatCompany = (companiesArr) => {
+    const formatedArr = companiesArr.map((company, i) => {
+      const date = new Date(company.createdAt);
+      const formatedDate = new Intl.DateTimeFormat(navigator.language).format(
+        date
+      );
+      const uint8Array = new Uint8Array(company.fileData.BlobData.data);
+      const file = new Blob([uint8Array], {
+        type: company.fileData.BlobContentType,
+      });
+
+      const url = URL.createObjectURL(file);
+      const downloadLink = (
+        <a href={url} download={company.fileData.BlobName}>
+          {company.fileData.BlobTags}
+        </a>
+      );
+      const btnModifica = (
+        <button id={i} className="btn" onClick={modifySelectedCompany}>
+          <FontAwesomeIcon className={styles.btn} icon={faPenToSquare} />
+        </button>
+      );
+      return {
+        Number: i + 1,
+        IdAzienda: company.IdAzienda,
+        DesAzienda: company.DesAzienda,
+        DesQuestionario: company.DesQuestionario,
+        DownloadLink: downloadLink,
+        FormatedDate: formatedDate,
+        Btn: btnModifica,
+      };
+    });
+    return formatedArr;
   };
 
   const extractCompanyDetails = (companiesArr) => {
@@ -96,6 +141,7 @@ const ListCompany = (props) => {
         downloadLink,
         formatDate,
       ];
+
       return [
         ...values,
         <button id={i} className="btn" onClick={modifySelectedCompany}>
@@ -119,7 +165,7 @@ const ListCompany = (props) => {
         />
       ) : (
         <div>
-          <CompanyLogo logoPath={logoLearning} companyName={"Le tue aziende"} />
+          {/*           <CompanyLogo logoPath={logoLearning} companyName={"Le tue aziende"} />
           <HeaderTable
             rows={companyHeaderTexts}
             sendStyles={companyStylesArr}
@@ -128,7 +174,8 @@ const ListCompany = (props) => {
             return (
               <RowsTable key={i} rows={company} sendStyles={companyStylesArr} />
             );
-          })}
+          })} */}
+          <ListingTable data={companyData} columns={columns} />
           <footer className={`${styles.table} ${styles["btn-container"]}`}>
             <Button
               btnType={"submit"}

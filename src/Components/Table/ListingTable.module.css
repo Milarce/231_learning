@@ -1,28 +1,70 @@
+@import url("https://fonts.cdnfonts.com/css/proxima-nova-2");
+
 .table {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 1px;
-  border: 1px solid #ccc;
+  border: none;
+  font-family: "Proxima Nova", "Trebuchet MS", Tahoma, sans-serif;
+  font-size: 1.5rem;
+  border-spacing: 4px;
+  width: 100%;
 }
 
 .table-header {
   color: white;
+}
+
+.header-cell {
   background: #ed1a3b;
   font-weight: 600;
-  justify-content: center;
-}
-
-.table-body {
-  background-color: #fff;
-}
-
-.table-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 1px;
-}
-
-.table-cell {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: none;
+}
+
+.sorting {
+  display: flex;
+  margin: 0 0.4rem;
+  justify-content: space-between;
+}
+
+.btn {
+  font-size: 1.7rem;
+}
+
+.body-cell {
+  background: #fff;
+  padding: 8px;
+  border: none;
+}
+
+.footer {
+  margin-top: 1rem;
+  border-bottom: solid #323232;
+  text-align: center;
+}
+
+.arrows {
+  font-size: 2rem;
+  color: #323232;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.arrows:disabled {
+  color: grey;
+  cursor: default;
+}
+
+.pages-text {
+  font-size: 1.5rem;
+  color: #323232;
+}
+
+.select-pages {
+  border: none;
+  background-color: #fff;
+  outline: none;
+  height: 3rem;
+  color: #323232;
+  margin-left: 4px;
 }

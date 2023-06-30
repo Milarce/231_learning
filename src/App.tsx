@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import ListCompany from "./Components/ListCompany";
 import ErrorPage from "./pages/ErrorPage";
 import EditCompany from "./Components/EditCompany";
+import ListEmployee from "./pages/ListEmployee";
 
 function App() {
   const router = createBrowserRouter(
@@ -30,6 +31,7 @@ function App() {
           //loader={listCompanyLoader}
         />
         <Route path="/list-company/:idAzienda" element={<EditCompany />} />
+        <Route path="/dipendenti" element={<ListEmployee />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     )

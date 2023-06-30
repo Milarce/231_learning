@@ -34,9 +34,7 @@ const MenuBar = (props) => {
                 className="main-item"
                 data-view-all="/it-it/industries-it"
               >
-                <a href="#" onClick={props.showList}>
-                  Dipendenti
-                </a>
+                <Link to="/dipendenti">Dipendenti</Link>
               </span>
             </li>
             <li>

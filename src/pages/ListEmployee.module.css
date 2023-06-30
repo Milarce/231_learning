@@ -1,0 +1,24 @@
+.section {
+  min-height: 100vh;
+  margin: 15rem auto;
+}
+
+.btn {
+  font-size: 2rem;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+@media (width>= 1140px) {
+  .section {
+    width: 1140px;
+  }
+}
+
+@media (769px <= width < 1140px) {
+  .section {
+    width: 970px;
+  }
+}
