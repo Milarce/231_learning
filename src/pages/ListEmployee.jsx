@@ -4,6 +4,8 @@ import styles from "./ListEmployee.module.css";
 import FormModal from "../Components/Modals/FormModal";
 import axios from "axios";
 import ListingTable from "../Components/Table/ListingTable";
+import Button from "../Components/Miscellany/Button";
+import CreateEmployee from "../Components/CreateEmployee";
 import { PulseLoader } from "react-spinners";
 import { validateUser } from "../validation/ValidateUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,13 +18,13 @@ const ListEmployee = () => {
   const navigate = useNavigate();
 
   const columns = [
-    { Header: "Id Azienda", accessor: "IdAzienda" },
-    { Header: "Id Dipendente", accessor: "IdDipendente" },
+    { Header: "No.", accessor: "Number" },
+    { Header: "Id", accessor: "IdDipendente" },
     { Header: "Cognome", accessor: "CognomeDipendente" },
     { Header: "Nome", accessor: "NomeDipendente" },
     { Header: "Mail", accessor: "MailDipendente" },
     { Header: "Attivo", accessor: "DipendenteAttivo" },
-    { Header: "Modifica", accessor: "btn" },
+    { Header: "Modifica", accessor: "Btn" },
   ];
 
   useEffect(() => {
@@ -30,6 +32,10 @@ const ListEmployee = () => {
       resp.loggedIn ? getData() : navigate("/login");
     });
   }, [IsVisible]); //Ejecuta useEffect cada vez que cambia "IsVisible"
+
+  const showCreateWindow = () => {
+    setIsVisible((prevIsVisible) => !prevIsVisible);
+  };
 
   const getData = async () => {
     try {
@@ -39,18 +45,15 @@ const ListEmployee = () => {
         },
       });
 
-      const btnModifica = (
-        <FontAwesomeIcon className={styles.btn} icon={faPenToSquare} />
-      );
-      const data = getEmployees.data.map((employee) => {
-        return { ...employee, btn: btnModifica };
-      });
-
-      setEmployeeData(data);
+      setEmployeeData(getEmployees.data);
       setLoading(false);
     } catch (err) {
       console.error(new Error(err));
     }
+  };
+
+  const modifySelectedEmployee = () => {
+    console.log("It works");
   };
 
   return (
@@ -65,7 +68,49 @@ const ListEmployee = () => {
           data-testid="loader"
         />
       ) : (
-        <ListingTable data={EmployeeData} columns={columns} />
+        <>
+          <ListingTable
+            data={EmployeeData.map((employee, i) => {
+              return {
+                ...employee,
+                Number: i + 1,
+                DipendenteAttivo: employee.DipendenteAttivo ? "Yes" : "No",
+                Btn: (
+                  <button
+                    id={i}
+                    className={styles.modify}
+                    onClick={modifySelectedEmployee}
+                  >
+                    <FontAwesomeIcon
+                      className={styles.btn}
+                      icon={faPenToSquare}
+                    />
+                  </button>
+                ),
+              };
+            })}
+            columns={columns}
+          />
+          <footer className={`${styles["btn-container"]}`}>
+            <Button
+              btnType={"submit"}
+              btnStyle={"create"}
+              btnAction={showCreateWindow}
+            >
+              Nuovo Utente
+            </Button>
+          </footer>
+          {IsVisible && (
+            <CreateEmployee
+              //headers={companyHeaderTexts}
+              onClose={showCreateWindow}
+              windowsType={{
+                headerText: "Crea nuovo utente",
+                btnText: "Crea",
+              }}
+            />
+          )}
+        </>
       )}
     </section>
   );

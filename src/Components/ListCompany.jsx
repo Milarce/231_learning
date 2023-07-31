@@ -23,15 +23,6 @@ const companyHeaderTexts = [
   "Modifica",
 ];
 
-const companyStylesArr = [
-  "one-size",
-  "four-size",
-  "seven-size",
-  "two-size",
-  "two-size",
-  "one-size",
-];
-
 const columns = [
   { Header: "No.", accessor: "Number" },
   { Header: "Id", accessor: "IdAzienda" },
@@ -44,7 +35,7 @@ const columns = [
 
 const ListCompany = (props) => {
   const [IsVisible, setIsVisible] = useState(false);
-  const [companyData, setCompanyData] = useState([]);
+  const [companyData, setCompanyData] = useState([1, 2, 3]);
   const [Loading, setLoading] = useState(true);
   const navigate = useNavigate();
   //const companyData = useLoaderData();
@@ -62,9 +53,12 @@ const ListCompany = (props) => {
           "my-access-token": localStorage.getItem("token"),
         },
       });
-      const data = formatCompany(getCompanies.data);
-      setCompanyData(data);
+      const data = getCompanies.data.map((company, i) => {
+        const formatedObj = formatCompany(company);
+        return { ...formatedObj, Number: i + 1 };
+      });
       setLoading(false);
+      setCompanyData(data);
     } catch (err) {
       console.error(new Error(err));
     }
@@ -75,81 +69,34 @@ const ListCompany = (props) => {
   };
 
   const modifySelectedCompany = (e) => {
-    const selCompanyId = e.target.closest(".btn").id;
+    const selCompanyId = e.target.closest("button").id;
     const cmpnyId = companyData[selCompanyId].IdAzienda;
     navigate(`/list-company/${cmpnyId}`);
   };
 
-  const formatCompany = (companiesArr) => {
-    const formatedArr = companiesArr.map((company, i) => {
-      const date = new Date(company.createdAt);
-      const formatedDate = new Intl.DateTimeFormat(navigator.language).format(
-        date
-      );
-      const uint8Array = new Uint8Array(company.fileData.BlobData.data);
-      const file = new Blob([uint8Array], {
-        type: company.fileData.BlobContentType,
-      });
-
-      const url = URL.createObjectURL(file);
-      const downloadLink = (
-        <a href={url} download={company.fileData.BlobName}>
-          {company.fileData.BlobTags}
-        </a>
-      );
-      const btnModifica = (
-        <button id={i} className="btn" onClick={modifySelectedCompany}>
-          <FontAwesomeIcon className={styles.btn} icon={faPenToSquare} />
-        </button>
-      );
-      return {
-        Number: i + 1,
-        IdAzienda: company.IdAzienda,
-        DesAzienda: company.DesAzienda,
-        DesQuestionario: company.DesQuestionario,
-        DownloadLink: downloadLink,
-        FormatedDate: formatedDate,
-        Btn: btnModifica,
-      };
+  const formatCompany = (companyObj) => {
+    const date = new Date(companyObj.createdAt);
+    const formatedDate = new Intl.DateTimeFormat(navigator.language).format(
+      date
+    );
+    const uint8Array = new Uint8Array(companyObj.fileData.BlobData.data);
+    const file = new Blob([uint8Array], {
+      type: companyObj.fileData.BlobContentType,
     });
-    return formatedArr;
-  };
 
-  const extractCompanyDetails = (companiesArr) => {
-    const detailsArr = companiesArr.map((cmpy, i) => {
-      const date = new Date(cmpy.createdAt); //La fecha leida del DB viene como STRING
-
-      const formatDate = new Intl.DateTimeFormat(navigator.language).format(
-        date
-      );
-      const uint8Array = new Uint8Array(cmpy.fileData.BlobData.data);
-      const file = new Blob([uint8Array], {
-        type: cmpy.fileData.BlobContentType,
-      });
-
-      const url = URL.createObjectURL(file);
-      const downloadLink = (
-        <a href={url} download={cmpy.fileData.BlobName}>
-          {cmpy.fileData.BlobTags}
-        </a>
-      );
-
-      const values = [
-        cmpy.IdAzienda,
-        cmpy.DesAzienda,
-        cmpy.DesQuestionario,
-        downloadLink,
-        formatDate,
-      ];
-
-      return [
-        ...values,
-        <button id={i} className="btn" onClick={modifySelectedCompany}>
-          <FontAwesomeIcon icon={faPenToSquare} />
-        </button>,
-      ];
-    });
-    return detailsArr;
+    const url = URL.createObjectURL(file);
+    const downloadLink = (
+      <a href={url} download={companyObj.fileData.BlobName}>
+        {companyObj.fileData.BlobTags}
+      </a>
+    );
+    return {
+      IdAzienda: companyObj.IdAzienda,
+      DesAzienda: companyObj.DesAzienda,
+      DesQuestionario: companyObj.DesQuestionario,
+      DownloadLink: downloadLink,
+      FormatedDate: formatedDate,
+    };
   };
 
   return (
@@ -165,18 +112,28 @@ const ListCompany = (props) => {
         />
       ) : (
         <div>
-          {/*           <CompanyLogo logoPath={logoLearning} companyName={"Le tue aziende"} />
-          <HeaderTable
-            rows={companyHeaderTexts}
-            sendStyles={companyStylesArr}
+          <ListingTable
+            data={companyData.map((data, i) => {
+              return {
+                ...data,
+                Btn: (
+                  <button
+                    id={i}
+                    className={styles.btn}
+                    onClick={modifySelectedCompany}
+                  >
+                    <FontAwesomeIcon
+                      className={styles.btn}
+                      icon={faPenToSquare}
+                    />
+                  </button>
+                ),
+              };
+            })}
+            columns={columns}
           />
-          {extractCompanyDetails(companyData).map((company, i) => {
-            return (
-              <RowsTable key={i} rows={company} sendStyles={companyStylesArr} />
-            );
-          })} */}
-          <ListingTable data={companyData} columns={columns} />
-          <footer className={`${styles.table} ${styles["btn-container"]}`}>
+
+          <footer className={`${styles["btn-container"]}`}>
             <Button
               btnType={"submit"}
               btnStyle={"create"}

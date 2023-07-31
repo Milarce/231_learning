@@ -10,24 +10,23 @@
   padding: 4px;
 }
 
-.table {
-  display: flex;
-  height: 45px;
-  gap: 4px;
-  margin: 3rem 0 0 0;
-  padding: 0;
-  border-color: #323232;
-  border-top: 2px solid;
-  padding-right: 1rem;
-  padding-top: 1rem;
+.btn {
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
 }
 
 .btn-container {
+  display: flex;
   justify-content: flex-end;
+  height: 45px;
+  gap: 4px;
+  margin: 2rem 0 0 0;
+  padding: 0;
 }
 
-footer.table.btn-container > * {
-  flex: 0 1 72px;
+footer.btn-container > * {
+  flex: 0 1 7rem;
 }
 
 .item {

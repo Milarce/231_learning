@@ -1,0 +1,107 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.overlay {
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  width: 50%;
+  max-width: 1120px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.form {
+  width: 85%;
+  margin: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1.5rem;
+}
+
+.el--header {
+  padding-top: 1rem;
+  color: white;
+  background: #ed1a3b;
+  font-weight: 600;
+  text-align: center;
+  max-width: 85%;
+  height: 2rem;
+}
+
+.el--rows {
+  max-width: 85%;
+  height: 4.2rem;
+  border: none;
+  resize: none;
+  font-family: "Proxima Nova", "Trebuchet MS", Tahoma, sans-serif;
+  font-size: 1.5rem;
+  background: white;
+  margin-bottom: 8px;
+}
+
+.el--rows:focus {
+  outline: none;
+  text-indent: 5px;
+}
+
+.el--rows::placeholder {
+  opacity: 0.5;
+  color: #333;
+  text-indent: 5px;
+}
+
+.user-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  background: #ed1a3b;
+  padding: 0 0.5rem;
+  width: 30%;
+}
+
+.user-label {
+  color: white;
+  font-weight: 600;
+}
+
+#active {
+  border: none;
+  outline: none;
+}
+
+@media (width>= 1140px) {
+  .overlay {
+    max-width: 700px;
+  }
+}
+
+@media (769px <= width < 1140px) {
+  .overlay {
+    max-width: 490px;
+  }
+  .user-flex {
+    min-width: 40%;
+  }
+}
+
+@media (min-width: 768px) {
+  .form {
+    width: 100%;
+  }
+
+  .el--rows {
+    width: 100%;
+    height: 4rem;
+  }
+}

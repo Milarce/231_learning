@@ -3,12 +3,27 @@
   margin: 15rem auto;
 }
 
-.btn {
+.modify {
+  border: none;
+  background-color: transparent;
   font-size: 2rem;
 }
 
-.btn:hover {
+.modify:hover {
   cursor: pointer;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  height: 45px;
+  gap: 4px;
+  margin: 2rem 0 0 0;
+  padding: 0;
+}
+
+footer.btn-container > * {
+  flex: 0 1 7rem;
 }
 
 @media (width>= 1140px) {

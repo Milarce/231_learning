@@ -74,7 +74,7 @@ const ListingTable = ({ columns, data }) => {
                     <span>{column.render("Header")}</span>
                     {column.isSorted && (
                       <FontAwesomeIcon
-                        className={styles.btn}
+                        className={styles["btn-arrow"]}
                         icon={
                           column.isSortedDesc
                             ? faArrowUpShortWide
@@ -94,7 +94,12 @@ const ListingTable = ({ columns, data }) => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => (
-                  <td className={styles["body-cell"]} {...cell.getCellProps()}>
+                  <td
+                    className={`${styles[cell.column.id]} ${
+                      styles["body-cell"]
+                    }`}
+                    {...cell.getCellProps()}
+                  >
                     {cell.render("Cell")}
                   </td>
                 ))}

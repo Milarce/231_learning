@@ -25,7 +25,7 @@
   justify-content: space-between;
 }
 
-.btn {
+.btn-arrow {
   font-size: 1.7rem;
 }
 
@@ -33,6 +33,11 @@
   background: #fff;
   padding: 8px;
   border: none;
+}
+
+.Btn {
+  display: flex;
+  justify-content: center;
 }
 
 .footer {
